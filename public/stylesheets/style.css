@@ -75,11 +75,26 @@ header h2{
 	border-radius: 100px;
 	color: black;
 	padding: 0px;
-	box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.25);
-	text-align: center;
-	line-height: 200px;
-	text-decoration: none;
-	font-size: 64px;
+}
+
+#gameright{
+	display: block;
+	position: fixed;
+	top: 100px;
+	right: 0px;
+	width: 25vw;
+	border: 3px solid blue;
+	height: 500px;
+}
+
+#gameleft{
+	display: block;
+	position: fixed;
+	top: 100px;
+	left: 0px;
+	width: 25vw;
+	border: 3px solid blue;
+	height: 500px;
 }
 
 #playbutton:hover{
@@ -101,7 +116,35 @@ header h2{
 	margin-left: 70px;
 }	
 
-footer{
-	align: bottom;
+#boardTable{
+	display: block;
+	width: 32vw;
+	height: 32vw;
+	margin: auto;
+	position: fixed;
+	margin: 0px;
+	margin-left: -16vw;
+	top: 150px;
+	left: 50%;
+	border: 3px solid red;
 }
 
+#boardTable tr{
+	width: 32vw;
+	height: 4vw;
+}
+
+#boardTable tr td{
+	height: 4vw;
+	width: 4vw;
+	border: 1.5px solid gold;
+}
+
+footer{
+	display: block;
+	position: relative;
+	bottom: 0px;
+	left: 0px;
+	height: 100px;
+	background-color: #443f35;
+}
