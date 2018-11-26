@@ -12,12 +12,7 @@ function generateBoard(){
             var cell = document.createElement("td");
             var id = "" + i + letters[j];
             cell.id = id;
-            var button = document.createElement("button");
-            button.id = "button" + i + letters[j];
-            button.type = "submit";
-            button.class = "boardButton";
-            button.innerHTML = "0";
-            cell.appendChild(button);
+            cell.class = "boardCell";
             row.appendChild(cell);
         }
         table.appendChild(row);
