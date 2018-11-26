@@ -1,4 +1,3 @@
-$(".boardCell").click(function(event){
+$("#boardTable tr td").click(function(event){
     console.log(event.target.id);
-    
 })
