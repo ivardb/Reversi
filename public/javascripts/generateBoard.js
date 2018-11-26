@@ -5,12 +5,12 @@ function generateBoard(){
     var container = document.getElementById("board");
     var table = document.createElement("table");
     table.id = "boardTable";
-    for(var i=1; i<=8; i++){
+    for(var i=0; i<8; i++){
         var row = document.createElement("tr");
-        row.id = "row " + i;
-        for(var j=0; j<8; j++){
+        row.id = "row " + letters[i];
+        for(var j=1; j<=8; j++){
             var cell = document.createElement("td");
-            var id = "" + i + letters[j];
+            var id = "" + letters[i] + j;
             cell.id = id;
             row.appendChild(cell);
         }
