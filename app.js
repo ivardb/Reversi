@@ -7,12 +7,6 @@ var app = express();
 var indexRouter = require("./routes/index");
 
 app.use(express.static(__dirname + "/public"));
-<<<<<<< HEAD
-http.createServer(app).listen(port);
-
-app.get("/play", indexRouter);
-app.get("/", indexRouter);
-=======
 
 var server = http.createServer(app);
 
@@ -30,4 +24,3 @@ app.get("/play", indexRouter);
 app.get("/", indexRouter);
 
 server.listen(port);
->>>>>>> e6d1f0b763db4f24dd483c795dfc94ed8fb71ac5
