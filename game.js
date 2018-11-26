@@ -5,6 +5,7 @@ var game = function(gameID) {
     this.id = gameID;
     this.gameState = new gameStateObject(); //detailed state, like whose turn it is what the board is and what each players score is
     this.generalState = "0 players"; //state of connection and if game is finished or not
+    this.finalStatus = false; //checks if game is finished or not
 };
 
 //all possible states of the game, more detailed states will be in the gameState object
@@ -68,6 +69,10 @@ game.prototype.setStatus = function (w) {
     else {
         return new Error("Impossible status change from %s to %s", this.generalState, w);
     }
+
+    if(w == "A" || w =="B" || w=="Aborted") {
+        finalStatus = true;
+    }
 };
 
 game.prototype.hasTwoConnectedPlayers = function () {
@@ -102,5 +107,15 @@ game.prototype.addPlayer = function (p) {
 
 //above all methods for creating the game
 //under all methods for progressing the game
+game.prototype.updateValidMoves = function(board, color){
+    for(var i = 0; i<64;i++) {
+        if(game.prototype.checkMove(board, color, i).includes(1)) {
+            this.gameState.updateMoves(i,color);
+        }
+    }
+};
 
+game.prototype.checkMove = function(board, color, i) {
+    
+};
 module.exports = game;
