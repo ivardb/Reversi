@@ -18,7 +18,6 @@ $("#boardTable tr td").click(function(event){
 })
 
 function setValue(value, location){
-    console.log("start of setValue method");
     if(value == 1){
         document.getElementById(location).style.backgroundImage = "url('/images/BlackPiece.png')"; 
     } else if(value == -1){
@@ -26,8 +25,25 @@ function setValue(value, location){
     }
 }
 
+function setScorePlayer1(score){
+    document.getElementById("player1score").innerHTML = score;
+}
+
+function setScorePlayer2(score){
+    document.getElementById("player2score").innerHTML = score;
+}
+
+function setNamePlayer1(name){
+    document.getElementById("player1name").innerHTML = name;
+}
+
+function setNamePlayer2(name){
+    document.getElementById("player2name").innerHTML = name;
+
+}
+/*
 socket.on("message", function incoming(message) {
 
 });
-
+*/
 

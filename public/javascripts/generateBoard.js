@@ -1,5 +1,4 @@
 function generateBoard(){
-    console.log("start of function");
     var letters = new Array("A", "B", "C", "D", "E", "F", "G", "H");
     var board = new Array();
     var container = document.getElementById("board");

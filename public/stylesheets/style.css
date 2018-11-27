@@ -82,9 +82,9 @@ header h2{
 	position: fixed;
 	top: 100px;
 	right: 0px;
-	width: 25vw;
+	width: 10vw;
 	border: 3px solid blue;
-	height: 500px;
+	height: 100%;
 }
 
 #gameleft{
@@ -92,10 +92,11 @@ header h2{
 	position: fixed;
 	top: 100px;
 	left: 0px;
-	width: 25vw;
+	width: 10vw;
 	border: 3px solid blue;
-	height: 500px;
+	height: 100%;
 }
+
 
 #playbutton:hover{
 	background-color: #0D9620;
@@ -116,6 +117,27 @@ header h2{
 	margin-left: 70px;
 }	
 
+#gameCenter{
+	display: block;
+}
+
+#gameCenter *{
+	z-index: 10;
+}
+
+#clock{
+	display: block;
+	position: fixed;
+	height: 50px;
+	width: 150px;
+	text-align: center;
+	margin-left: -75px;
+	left: 50%;
+	top: 100px;
+	color: #443F35;
+
+}
+
 #boardTable{
 	display: block;
 	width: 32vw;
@@ -126,9 +148,7 @@ header h2{
 	margin-left: -16vw;
 	top: 150px;
 	left: 50%;
-	border: 3px solid #443f35;
-	box-shadow: 3px 3px 2px gray;
-	background: #0D9620;
+	/*box-shadow: 3px 3px 2px gray;*/
 	border-collapse: collapse;
 }
 
@@ -137,21 +157,39 @@ header h2{
 	height: 4vw;
 	border: none;
 	border-collapse: collapse;
+	margin: 0px;
+	padding: 0px;
 }
 
 #boardTable tr td{
 	height: 4vw;
 	width: 4vw;
 	border: 3px solid #443f35;
-	border-collapse: collapse;
+	border-collapse: collapse;	
+	margin: 0px;
+	padding: 0px;
+	background-color: #0D9620;
 	background-size: cover;
 }
 
 footer{
 	display: block;
-	position: relative;
+	position: fixed;
 	bottom: 0px;
 	left: 0px;
-	height: 100px;
+	height: 50px;
+	width: 100%;
 	background-color: #443f35;
+}
+
+#versionInfo{
+	float: right;
+	color: #ffffff;
+	margin: 10px;
+}
+
+#copyRightInfo{
+	float: left;
+	color: #ffffff;
+	margin: 10px;
 }
