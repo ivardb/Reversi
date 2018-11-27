@@ -128,18 +128,23 @@ header h2{
 	left: 50%;
 	border: 3px solid #443f35;
 	box-shadow: 3px 3px 2px gray;
+	background: #0D9620;
+	border-collapse: collapse;
 }
 
 #boardTable tr{
 	width: 32vw;
 	height: 4vw;
+	border: none;
+	border-collapse: collapse;
 }
 
 #boardTable tr td{
 	height: 4vw;
 	width: 4vw;
-	border: 1.5px solid #443f35;
-	background: #0D9620;
+	border: 3px solid #443f35;
+	border-collapse: collapse;
+	background-size: cover;
 }
 
 footer{
@@ -149,33 +154,4 @@ footer{
 	left: 0px;
 	height: 100px;
 	background-color: #443f35;
-}
-
-#whiteStone{
-	display: block;
-	background-color: white;
-	width: 4vw;
-	height: 4vw;
-	padding: 0px;
-	border-radius: 2vw;
-}
-
-#blackStone{
-	display: block;
-	background-color: black;
-	width: 4vw;
-	height: 4vw;
-	padding: 0px;
-	border-radius: 2vw;
-}
-
-#boardTable tr td button{
-	display: block;
-	background-color: rgba(0,0,0,0);
-	width: 4vw;
-	height: 4vw;
-	border: none;
-	content: "0";
-	margin: none;
-	z-index: 1000;
 }
