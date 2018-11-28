@@ -1,0 +1,47 @@
+#Play{
+	left: 0vw;
+}
+
+#Settings{
+	left: 33vw;
+}
+
+#HowToPlay{
+	left: 66vw;
+}
+
+#playbutton{
+	position: fixed;
+	margin: 0px;
+	margin-top: -100px;
+	top: 50%;
+	left: 50%;
+	margin-left: -100px;
+	display: inline-block;
+	background-color: #43C12A;
+	height: 200px;
+	max-height: 200px;
+	width: 200px;
+	border-radius: 100px;
+	color: black;
+	padding: 0px;
+}
+
+#playbutton:hover{
+	background-color: #0D9620;
+}
+
+#playbutton:active{
+	box-shadow: none;
+	background-color: #43C12A;
+}
+	
+#arrow_right{
+	width: 0; 
+	height: 0; 
+	border-top: 50px solid transparent;
+	border-bottom: 50px solid transparent;
+	border-left: 85px solid #080705;
+	margin: 50px;
+	margin-left: 70px;
+}	

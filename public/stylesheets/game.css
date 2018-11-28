@@ -1,0 +1,74 @@
+#gameright{
+	display: block;
+	position: fixed;
+	top: 100px;
+	right: 0px;
+	width: 10vw;
+	border: 3px solid blue;
+	height: 100%;
+}
+
+#gameleft{
+	display: block;
+	position: fixed;
+	top: 100px;
+	left: 0px;
+	width: 10vw;
+	border: 3px solid blue;
+	height: 100%;
+}
+
+#gameCenter{
+	display: block;
+}
+
+#gameCenter *{
+	z-index: 10;
+}
+
+#clock{
+	display: block;
+	position: fixed;
+	height: 50px;
+	width: 150px;
+	text-align: center;
+	margin-left: -75px;
+	left: 50%;
+	top: 100px;
+	color: #443F35;
+
+}
+
+#boardTable{
+	display: block;
+	width: 32vw;
+	height: 32vw;
+	margin: auto;
+	position: fixed;
+	margin: 0px;
+	margin-left: -16vw;
+	top: 150px;
+	left: 50%;
+	/*box-shadow: 3px 3px 2px gray;*/
+	border-collapse: collapse;
+}
+
+#boardTable tr{
+	width: 32vw;
+	height: 4vw;
+	border: none;
+	border-collapse: collapse;
+	margin: 0px;
+	padding: 0px;
+}
+
+#boardTable tr td{
+	height: 4vw;
+	width: 4vw;
+	border: 3px solid #443f35;
+	border-collapse: collapse;	
+	margin: 0px;
+	padding: 0px;
+	background-color: #0D9620;
+	background-size: cover;
+}
