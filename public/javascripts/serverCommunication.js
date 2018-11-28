@@ -26,11 +26,11 @@ function setValue(value, location){
 }
 
 function setScorePlayer1(score){
-    document.getElementById("player1score").innerHTML = score;
+    document.getElementById("player1score").innerHTML = "Score: " + score;
 }
 
 function setScorePlayer2(score){
-    document.getElementById("player2score").innerHTML = score;
+    document.getElementById("player2score").innerHTML = "Score: " + score;
 }
 
 function setNamePlayer1(name){
