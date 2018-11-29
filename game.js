@@ -1,5 +1,5 @@
-var gameStateObject = require("gamestate.js"); 
-var boardObj = require("board.js"); 
+var gameStateObject = require("./gamestate"); 
+var boardObj = require("./board"); 
 var game = function(gameID) {
     this.playerA = null;
     this.playerB = null;
