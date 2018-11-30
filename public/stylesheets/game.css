@@ -72,3 +72,15 @@
 	background-color: #0D9620;
 	background-size: cover;
 }
+
+#fullscreenButton{
+	background-size: cover;
+	height: 50px;
+	width: 50px;
+	display: block;
+	position: fixed;
+	top: 25px;
+	right: 25px;
+	z-index: 110;
+	border: 3px solid yellow;
+}

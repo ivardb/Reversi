@@ -1,5 +1,6 @@
 var socket = new WebSocket("ws://localhost:3000");
 var letters = new Array("A", "B", "C", "D", "E", "F", "G", "H");
+var player = null;
 
 $("#boardTable tr td").click(function(event){
     var id = String(event.target.id);
@@ -8,8 +9,8 @@ $("#boardTable tr td").click(function(event){
     //For testing purposes
     setValue("-1", id);
 
-    var xLoc = letters.indexOf(id.charAt(0))+1;
-    var yLoc = parseInt(id.charAt(1));
+    var xLoc = letters.indexOf(id.charAt(0));
+    var yLoc = parseInt(id.charAt(1))-1;
     console.log(xLoc);
     console.log(yLoc);
     var move = {type:"MOVE", x:xLoc, y:yLoc};
@@ -50,11 +51,14 @@ function createBoard(boardArr){
 }
 
 socket.onmessage = function incoming(message) {
+    console.log(message);
     var mesObj = JSON.parse(message);
-    if(mesObj.type === "board"){
-        var boardArr = mesObj.board;
-        createBoard(boardArr);
-    } 
+    if(mesObj.type == "board"){
+        createBoard(mesObj.board);
+    } else if(mesObj.type == "gameStart"){
+        player = mesObj.player;
+        createBoard(mesObj.board);
+    }
 }
 
 function testBoard(){
@@ -70,6 +74,4 @@ function testBoard(){
     ];
     createBoard(boardArr);
 }
-
-testBoard();
 
