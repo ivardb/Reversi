@@ -115,7 +115,7 @@ game.prototype.addPlayer = function (p) {
 game.prototype.updateValidMoves = function(board, color){
     for(var i = 0; i<8;i++) {
         for(var j = 0;j<8;j++) {
-            if(game.prototype.checkMove(board, color, i, j).includes(1)) {
+            if(game.prototype.checkMove(board, color, i, j).includes(true)) {
                 this.gameState.updateMoves(i, j, color);
             }
         }
@@ -124,8 +124,8 @@ game.prototype.updateValidMoves = function(board, color){
 
 game.prototype.checkMove = function(board, color, x, y) {
     var capSides = new Array(8).fill(false);
-    if(board.getValue(x,y)==0) {
-        var adjArray = board.getAdjacent(x,y);
+    if(board.getValue(board, x,y)==0) {
+        var adjArray = board.getAdjacent(board, x,y);
         var adj = 0;
         for(let i = 0; i<8; i++) {
             if(adjArray[i] == color*-1) {
@@ -163,13 +163,13 @@ game.prototype.checkValidCaptureSide = function(board, color, x,y,i) {
                 dy=1;
                 break;
     }
-    y-=dy;
-    x-=dx;
-    while(board.getValue(x,y) == color*-1) {
-        y-=dy;
-        x-=dx;
+    y+=dy;
+    x+=dx;
+    while(board.getValue(board, x,y) == color*-1) {
+        y+=dy;
+        x+=dx;
     }
-    if(board.getValue(x,y)==color) {
+    if(board.getValue(board, x,y)==color) {
         return true;
     }
     return false;

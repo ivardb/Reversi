@@ -9,11 +9,11 @@ $("#boardTable tr td").click(function(event){
     //For testing purposes
     setValue("-1", id);
 
-    var xLoc = letters.indexOf(id.charAt(0));
-    var yLoc = parseInt(id.charAt(1))-1;
+    var yLoc = letters.indexOf(id.charAt(0)); //x and y where wrong
+    var xLoc = parseInt(id.charAt(1))-1;
     console.log(xLoc);
     console.log(yLoc);
-    var move = {type:"move", x:xLoc, y:yLoc};
+    var move = {type:"move", player:player, x:xLoc, y:yLoc};
     socket.send(JSON.stringify(move));
 })
 
