@@ -1,10 +1,12 @@
 
 var board = function(){
-    this.boardArray = new Array(8).fill(new Array(8).fill(0));
-    this.boardArray[3][3] = -1;
-    this.boardArray[4][4] = -1;
+    //this.boardArray = new Array(8).fill(new Array(8).fill(0));
+    this.boardArray = [[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]];
+    this.boardArray[4][3] = 1;
     this.boardArray[3][4] = 1;
-    this.boardArray[4][5] = 1;
+    this.boardArray[4][4] = -1;
+    this.boardArray[3][3] = -1;
+    console.log(this.boardArray);
     this.getValue = board.prototype.getValue;
     this.getAdjacent = getAdjacent;
 }
