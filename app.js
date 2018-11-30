@@ -49,7 +49,7 @@ wss.on("connection", function(ws) {
         var playerType = mesObj.player;
         var messageType = mesObj.type;
         if(mesObj.type == "move") {
-            console.log("\t[move]Player " + playerType + " made the following move: " + mesObj.x + mesObje.y);
+            console.log("\t[move]Player " + playerType + " made the following move: " + mesObj.x + mesObj.y);
             if(playerType == "A") {
                 console.log(gameObj.gameState.getValidMove(mesObj.x, mesObj.y, 1));
             } else {

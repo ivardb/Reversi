@@ -12,19 +12,19 @@ var game = function() {
 }
 function updateMoves(x, y, color) {
     if(color == 1) {
-        validMovesBlack[y][x] = 1;
+        this.validMovesBlack[y][x] = 1;
     } else {
-        validMovesWhite[y][x] = 1;
+        this.validMovesWhite[y][x] = 1;
     }
 }
 
 function getValidMove(x, y, color) {
     if(color == -1) {
-        if(validMovesWhite[x][y] == 1) {
+        if(this.validMovesWhite[x][y] == 1) {
             return true;
         }
     } else {
-        if(validMovesBlack[x][y] == 1) {
+        if(this.validMovesBlack[x][y] == 1) {
             return true;
         }
     }

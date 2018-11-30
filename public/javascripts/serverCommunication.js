@@ -13,7 +13,7 @@ $("#boardTable tr td").click(function(event){
     var yLoc = parseInt(id.charAt(1))-1;
     console.log(xLoc);
     console.log(yLoc);
-    var move = {type:"MOVE", x:xLoc, y:yLoc};
+    var move = {type:"move", x:xLoc, y:yLoc};
     socket.send(JSON.stringify(move));
 })
 
