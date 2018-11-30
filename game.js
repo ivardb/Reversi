@@ -8,6 +8,7 @@ var game = function(gameID) {
     this.generalState = "0 players"; //state of connection and if game is finished or not
     this.finalStatus = false; //checks if game is finished or not
     this.board = new boardObj();
+    this.addPlayer = game.prototype.addPlayer;
 };
 
 //all possible states of the game, more detailed states will be in the gameState object
@@ -82,7 +83,7 @@ game.prototype.hasTwoConnectedPlayers = function () {
 };
 
 game.prototype.addPlayer = function (p) {
-
+    console.log("adding player");
     console.assert(p instanceof Object, "%s: Expecting an object (WebSocket), got a %s", arguments.callee.name, typeof p);
 
     if (this.generalState != "0 players" && this.generalState != "1 player") {

@@ -1,10 +1,10 @@
-var boardArray = new Array(8).fill(new Array(8).fill(0));
 
-function Board(){
-    boardArray[3][3] = -1;
-    boardArray[4][4] = -1;
-    boardArray[3][4] = 1;
-    boardArray[4][5] = 1;
+var board = function(){
+    this.boardArray = new Array(8).fill(new Array(8).fill(0));
+    this.boardArray[3][3] = -1;
+    this.boardArray[4][4] = -1;
+    this.boardArray[3][4] = 1;
+    this.boardArray[4][5] = 1;
 }
 
 function getValue(x, y){
@@ -78,3 +78,5 @@ function getSurroundingPieces(x,y){
     ret[6] = getValueB(x, y);
     ret[7] = getValueBR(x, y);
 }
+
+module.exports = board;

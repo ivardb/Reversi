@@ -16,7 +16,7 @@ var server = http.createServer(app);
 
 const wss = new WebSocket.Server({server});
 var id = 0;
-//var currentGame = new game(id++);
+var currentGame = new game(id++);
 
 var websockets = {}; //property websocket, value: game
 
@@ -56,6 +56,7 @@ function connect(ws) {
     console.log("Connecting player to game");
     if(currentGame.generalState == "0 players" || currentGame.generalState == "1 player") {
         websockets[ws] = currentGame;
+        currentGame.addPlayer(ws);
     } else {
         currentGame = new game(id++);
     }
