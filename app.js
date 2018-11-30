@@ -28,7 +28,7 @@ setInterval(function() {
             let gameObj = websockets[i];
             if(gameObj.finalStatus==true) {
                 console.log("\tDeleting element " + i);
-                delete websocket[i];
+                delete websockets[i];
             }
         }
     }
@@ -59,6 +59,7 @@ wss.on("connection", function(ws) {
             console.log(playerType);
             if(playerType == "A") {
                 gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y);
+                gameObj.gameState.calculateScore(gameObj.board);
                 gameObj.gameState.clear();
                 gameObj.updateValidMoves(gameObj.board, color);
                 gameObj.updateValidMoves(gameObj.board, color*-1);
@@ -75,7 +76,7 @@ wss.on("connection", function(ws) {
                 }
             } else {
                 gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y);
-                gameObj.gameState.calculateScore();
+                gameObj.gameState.calculateScore(gameObj.board);
                 gameObj.gameState.clear();
                 gameObj.updateValidMoves(gameObj.board, color);
                 gameObj.updateValidMoves(gameObj.board, color*-1);
