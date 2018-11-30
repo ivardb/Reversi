@@ -83,7 +83,6 @@ game.prototype.hasTwoConnectedPlayers = function () {
 };
 
 game.prototype.addPlayer = function (p) {
-    console.log("adding player");
     console.assert(p instanceof Object, "%s: Expecting an object (WebSocket), got a %s", arguments.callee.name, typeof p);
 
     if (this.generalState != "0 players" && this.generalState != "1 player") {

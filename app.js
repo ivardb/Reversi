@@ -35,8 +35,11 @@ setInterval(function() {
 
 wss.on("connection", function(ws) {
     console.log("Connection established");
-    var player = connect(ws);
-    ws.send(JSON.stringify(player));
+    var initConnect = {};
+    initConnect.player = connect(ws);
+    initConnect.type = "gameStart";
+    initConnect.board = websockets[ws].board.boardArray;
+    ws.send(JSON.stringify(initConnect));
 
     ws.on("message", function incoming(message) {
         console.log("[LOG] " + message);
@@ -53,13 +56,14 @@ wss.on("connection", function(ws) {
 });
 
 function connect(ws) {
-    console.log("Connecting player to game");
     if(currentGame.generalState == "0 players" || currentGame.generalState == "1 player") {
         websockets[ws] = currentGame;
-        currentGame.addPlayer(ws);
+        var player = currentGame.addPlayer(ws);
     } else {
         currentGame = new game(id++);
+        websockets[ws] = currentGame;
+        var player = currentGame.addPlayer(ws);
     }
-    
+    return player;
 }
 server.listen(port);
