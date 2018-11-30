@@ -9,6 +9,8 @@ var game = function(gameID) {
     this.finalStatus = false; //checks if game is finished or not
     this.board = new boardObj();
     this.addPlayer = game.prototype.addPlayer;
+    game.prototype.updateValidMoves(-1);
+    game.prototype.updateValidMoves(1);
 };
 
 //all possible states of the game, more detailed states will be in the gameState object
@@ -74,7 +76,7 @@ game.prototype.setStatus = function (w) {
     }
 
     if(w == "A" || w =="B" || w=="Aborted") {
-        finalStatus = true;
+        this.finalStatus = true;
     }
 };
 
@@ -109,24 +111,24 @@ game.prototype.addPlayer = function (p) {
 
 //above all methods for creating the game
 //under all methods for progressing the game
-game.prototype.updateValidMoves = function(board, color){
+game.prototype.updateValidMoves = function(color){
     for(var i = 0; i<8;i++) {
         for(var j = 0;j<8;j++) {
-            if(game.prototype.checkMove(board, color, i, j).includes(1)) {
+            if(game.prototype.checkMove(color, i, j).includes(1)) {
                 this.gameState.updateMoves(i, j, color);
             }
         }
     }
 };
 
-game.prototype.checkMove = function(board, color, x, y) {
+game.prototype.checkMove = function(color, x, y) {
     var capSides = new Array(8).fill(false);
-    if(board.getValue(x,y)==0) {
-        var adjArray = board.getAdjacent(x,y);
+    if(this.board.getValue(x,y)==0) {
+        var adjArray = this.board.getAdjacent(x,y);
         var adj = 0;
         for(let i = 0; i<8; i++) {
             if(adjArray[i] == color*-1) {
-                if(game.prototype.checkValidCaptureSide(board, color, x,y,i)) {
+                if(game.prototype.checkValidCaptureSide(color, x,y,i)) {
                     capSides[i] = true;
                 }
             }
@@ -135,7 +137,7 @@ game.prototype.checkMove = function(board, color, x, y) {
     return capSides;
 };
 
-game.prototype.checkValidCaptureSide = function(board, color, x,y,i) {
+game.prototype.checkValidCaptureSide = function(color, x,y,i) {
     var dx=0;
     var dy=0;
     switch(i) {
@@ -162,11 +164,11 @@ game.prototype.checkValidCaptureSide = function(board, color, x,y,i) {
     }
     y-=dy;
     x-=dx;
-    while(board.getValue(x,y) == color*-1) {
+    while(this.board.getValue(x,y) == color*-1) {
         y-=dy;
         x-=dx;
     }
-    if(board.getValue(x,y)==color) {
+    if(this.board.getValue(x,y)==color) {
         return true;
     }
     return false;

@@ -5,65 +5,66 @@ var board = function(){
     this.boardArray[4][4] = -1;
     this.boardArray[3][4] = 1;
     this.boardArray[4][5] = 1;
+    this.getValue = getValue();
 }
 
 function getValue(x, y){
-    return boardArray[y][x];
+    return this.boardArray[y][x];
 }
 
 function getValueT(x, y){
     if(y <= 0)return null;
     else{
-        return boarArray[y-1][x];
+        return this.boarArray[y-1][x];
     }
 }
 
 function getValueB(x, y){
     if(y >= 7)return null;
     else{
-        return boarArray[y+1][x];
+        return this.boarArray[y+1][x];
     }
 }
 
 function getValueL(x, y){
     if(x <= 0)return null;
     else{
-        return boarArray[y][x-1];
+        return this.boarArray[y][x-1];
     }
 }
 
 function getValueR(x, y){
     if(x >= 7)return null;
     else{
-        return boarArray[y][x+1];
+        return this.boarArray[y][x+1];
     }
 }
 
 function getValueTL(){
     if(y <= 0 || x <= 0 )return null;
     else{
-        return boardArray[y-1][x-1];
+        return this.boardArray[y-1][x-1];
     }
 }
 
 function getValueTR(){
     if(y <= 0 || x >= 7 )return null;
     else{
-        return boardArray[y-1][x+1];
+        return this.boardArray[y-1][x+1];
     }
 }
 
 function getValueBL(){
     if(y >= 7 || x <= 0 )return null;
     else{
-        return boardArray[y+1][x-1];
+        return this.boardArray[y+1][x-1];
     }
 }
 
 function getValueBR(){
     if(y >= 7 || x >= 7 )return null;
     else{
-        return boardArray[y+1][x+1];
+        return this.boardArray[y+1][x+1];
     }
 }
 
