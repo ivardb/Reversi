@@ -6,7 +6,7 @@ var validOptions = null;
 var currentBoard = null;
 var blackScore;
 var whiteScore;
-var timer = require("./timer");
+var gameStart = null;
 
 $("#boardTable tr td").click(function(event){
     if(myTurn === true){
@@ -114,7 +114,7 @@ socket.onmessage = function incoming(message) {
         createBoard(mesObj.board);
         currentBoard = mesObj.board;
         document.getElementById("player1score").innerHTML = mesObj.scoreA;
-        document.getElementById("player1score").innerHTML = mesObj.scoreB;
+        document.getElementById("player2score").innerHTML = mesObj.scoreB;
     } else if(mesObj.type == "gameStart"){
         player = mesObj.player;
         createBoard(mesObj.board);
@@ -127,7 +127,8 @@ socket.onmessage = function incoming(message) {
             document.getElementById("player1type").innerHTML = "Opponent";
         } 
         document.getElementById("player1score").innerHTML = mesObj.scoreA;
-        document.getElementById("player1score").innerHTML = mesObj.scoreB;
+        document.getElementById("player2score").innerHTML = mesObj.scoreB;
+        timer();
         for(i = 0; i < validOptions.length; i++){
         for(j=1; j<= validOptions.length; j++){
             var id = letters[i] + j;
@@ -144,5 +145,3 @@ socket.onmessage = function incoming(message) {
             drawValidOptions(mesObj.valid);
     }
 }
-
-
