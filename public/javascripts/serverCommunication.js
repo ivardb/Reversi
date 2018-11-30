@@ -6,6 +6,7 @@ var validOptions = null;
 var currentBoard = null;
 var blackScore;
 var whiteScore;
+var timer = require("./timer");
 
 $("#boardTable tr td").click(function(event){
     if(myTurn === true){
@@ -112,12 +113,12 @@ socket.onmessage = function incoming(message) {
     if(mesObj.type == "board"){
         createBoard(mesObj.board);
         currentBoard = mesObj.board;
-        calculateScore();
+        document.getElementById("player1score").innerHTML = mesObj.scoreA;
+        document.getElementById("player1score").innerHTML = mesObj.scoreB;
     } else if(mesObj.type == "gameStart"){
         player = mesObj.player;
         createBoard(mesObj.board);
         currentBoard = mesObj.board;
-        calculateScore();
         if(player == "A"){
             document.getElementById("player1type").innerHTML = "You";
             document.getElementById("player2type").innerHTML = "Opponent";
@@ -125,6 +126,17 @@ socket.onmessage = function incoming(message) {
             document.getElementById("player2type").innerHTML = "You";
             document.getElementById("player1type").innerHTML = "Opponent";
         } 
+        document.getElementById("player1score").innerHTML = mesObj.scoreA;
+        document.getElementById("player1score").innerHTML = mesObj.scoreB;
+        for(i = 0; i < validOptions.length; i++){
+        for(j=1; j<= validOptions.length; j++){
+            var id = letters[i] + j;
+            if(validOptions[j-1][i] == 1){
+                document.getElementById(id).style.backgroundImage = "none";
+            }
+        }
+
+    }
     } else if(mesObj.type="turn"){
             myTurn = true;
             console.log(myTurn);
