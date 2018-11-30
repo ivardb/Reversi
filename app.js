@@ -4,6 +4,7 @@ var WebSocket = require("ws");
 var port = process.argv[2];
 var app = express();
 var game = require("./game");
+var messages = require("./messages");
 
 var indexRouter = require("./routes/index");
 
@@ -35,11 +36,11 @@ setInterval(function() {
 
 wss.on("connection", function(ws) {
     console.log("Connection established");
-    var initConnect = {};
-    initConnect.player = connect(ws);
-    initConnect.type = "gameStart";
-    initConnect.board = websockets[ws].board.boardArray;
-    ws.send(JSON.stringify(initConnect));
+    var gameStartObj = messages.gameStart(connect(ws), websockets[ws].board.boardArray);
+    ws.send(JSON.stringify(gameStartObj));
+    if(gameStartObj.player == "B") {
+        ws.send(JSON.stringify(messages.turn(websockets[ws].gameState.validMovesBlack)));
+    }  
 
     ws.on("message", function incoming(message) {
         //console.log("[LOG] " + message);
