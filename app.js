@@ -51,9 +51,9 @@ wss.on("connection", function(ws) {
         if(mesObj.type == "move") {
             //console.log("\t[move]Player " + playerType + " made the following move: " + mesObj.x + mesObj.y);
             if(playerType == "A") {
-                console.log(gameObj.gameState.getValidMove(mesObj.x, mesObj.y, 1));
-            } else {
                 console.log(gameObj.gameState.getValidMove(mesObj.x, mesObj.y, -1));
+            } else {
+                console.log(gameObj.gameState.getValidMove(mesObj.x, mesObj.y, 1));
             }
         }
         if(mesObj.type == "concede") {

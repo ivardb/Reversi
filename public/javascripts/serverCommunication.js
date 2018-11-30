@@ -1,21 +1,21 @@
 var socket = new WebSocket("ws://localhost:3000");
 var letters = new Array("A", "B", "C", "D", "E", "F", "G", "H");
 var player = null;
+var myTurn = false;
 
 $("#boardTable tr td").click(function(event){
-    var id = String(event.target.id);
-    console.log(id);
-
-    //For testing purposes
-    setValue("-1", id);
-
-    var yLoc = letters.indexOf(id.charAt(0)); //x and y where wrong
-    var xLoc = parseInt(id.charAt(1))-1;
-    console.log(xLoc);
-    console.log(yLoc);
-    var move = {type:"move", player:player, x:xLoc, y:yLoc};
-    socket.send(JSON.stringify(move));
-})
+    if(myTurn === true){
+        myTurn = false;
+        var id = String(event.target.id);
+        console.log(id);
+        var yLoc = letters.indexOf(id.charAt(0)); //x and y where wrong
+        var xLoc = parseInt(id.charAt(1))-1;
+        console.log(xLoc);
+        console.log(yLoc);
+        var move = {type:"move", player:player, x:xLoc, y:yLoc};
+        socket.send(JSON.stringify(move));
+    }
+});
 
 function setValue(value, location){
     if(value == 1){
@@ -39,11 +39,9 @@ function setNamePlayer1(name){
 
 function setNamePlayer2(name){
     document.getElementById("player2name").innerHTML = name;
-
 }
 
 function createBoard(boardArr){
-    console.log("creating board...");
     for(i = 0; i < boardArr.length; i++){
         for(j=1; j <= boardArr[i].length; j++){
             setValue(boardArr[i][j-1], letters[i] + j); 
@@ -62,24 +60,16 @@ socket.onmessage = function incoming(message) {
         if(player == "A"){
             document.getElementById("player1type").innerHTML = "You";
             document.getElementById("player2type").innerHTML = "Opponent";
+
         } else if(player == "B"){
             document.getElementById("player2type").innerHTML = "You";
-            document.getElementById("player1type").innerHTML = "Opponent"
-        }
+            document.getElementById("player1type").innerHTML = "Opponent";
+        } 
+    } else if(mesObj.type="turn"){
+            myTurn = true;
+            console.log(myTurn);
+            var validOptions = mesObj.valid;
     }
 }
 
-function testBoard(){
-    var boardArr = [
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 1, -1, 0, 0, 0],
-        [0, 0, 0, -1, 1, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0]
-    ];
-    createBoard(boardArr);
-}
 
