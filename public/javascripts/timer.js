@@ -13,4 +13,4 @@ setInterval(function(){
     if(minutes < 10)strMinutes = "0"+strMinutes;
     if(hours < 10)strHours = "0"+strHours;
     document.getElementById("clock").innerHTML = strHours + ":" + strMinutes + ":" + strSeconds;
-}, 1000);
+}, 100);
