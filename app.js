@@ -16,7 +16,7 @@ var server = http.createServer(app);
 
 const wss = new WebSocket.Server({server});
 var id = 0;
-var currentGame = new game(id++);
+//var currentGame = new game(id++);
 
 var websockets = {}; //property websocket, value: game
 

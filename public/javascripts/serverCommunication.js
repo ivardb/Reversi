@@ -2,19 +2,18 @@ var socket = new WebSocket("ws://localhost:3000");
 var letters = new Array("A", "B", "C", "D", "E", "F", "G", "H");
 
 $("#boardTable tr td").click(function(event){
-    console.log(event.target.id);
+    var id = String(event.target.id);
+    console.log(id);
 
     //For testing purposes
-    setValue("-1", event.target.id);
+    setValue("-1", id);
 
-    /*
-    var location = event.target.id; 
-    var yLoc = letters.indexOf(location.charAt(0)) + 1;
-    var xLoc = parseInt(location.charAt(1));
-    console.log(xLoc + " - " + yLoc);
+    var xLoc = letters.indexOf(id.charAt(0))+1;
+    var yLoc = parseInt(id.charAt(1));
+    console.log(xLoc);
+    console.log(yLoc);
     var move = {type:"MOVE", x:xLoc, y:yLoc};
     socket.send(JSON.stringify(move));
-    */
 })
 
 function setValue(value, location){
@@ -41,9 +40,36 @@ function setNamePlayer2(name){
     document.getElementById("player2name").innerHTML = name;
 
 }
-/*
-socket.on("message", function incoming(message) {
 
-});
-*/
+function createBoard(boardArr){
+    for(i = 0; i < boardArr.length; i++){
+        for(j=1; j <= boardArr[i].length; j++){
+            setValue(boardArr[i][j-1], letters[i] + j); 
+        }
+    }
+}
+
+socket.onmessage = function incoming(message) {
+    var mesObj = JSON.parse(message);
+    if(mesObj.type === "board"){
+        var boardArr = mesObj.board;
+        createBoard(boardArr);
+    } else id
+}
+
+function testBoard(){
+    var boardArr = [
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, -1, 0, 0, 0],
+        [0, 0, 0, -1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0]
+    ];
+    createBoard(boardArr);
+}
+
+testBoard();
 
