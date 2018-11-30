@@ -61,10 +61,12 @@ wss.on("connection", function(ws) {
                 gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y);
                 gameObj.updateValidMoves(gameObj.board, color);
                 gameObj.updateValidMoves(gameObj.board, color*-1);
+                gameObj.playerA.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
+                gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
                 if(canMove(color*-1)) {
-                    gameObj.playerA.send(messages.turn(gameObj.gameState.validMovesWhite));
+                    gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)));
                 } else {
-                    gameObj.playerB.send(messages.turn(gameObj.gameState.validMovesWhite));
+                    gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)));
                 }
             }
         }

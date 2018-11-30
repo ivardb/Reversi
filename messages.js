@@ -13,5 +13,13 @@ function turn(validMoves) {
     return ret;
 }
 
+function board(board) {
+    var ret = {};
+    ret.type = "board";
+    ret.board = board;
+    return ret;
+}
+
 exports.gameStart = gameStart;
 exports.turn = turn;
+exports.board = board;
