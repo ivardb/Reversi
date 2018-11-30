@@ -4,6 +4,8 @@ var player = null;
 var myTurn = false;
 var validOptions = null;
 var currentBoard = null;
+var blackScore;
+var whiteScore;
 
 $("#boardTable tr td").click(function(event){
     if(myTurn === true){
@@ -64,10 +66,11 @@ function createBoard(boardArr){
 }
 
 function drawValidOptions(validOptions){
-    for(i = 0; i < validOptions.length; i++){
-        for(j=1; j<= validOptions.length; j++){
-            var id = letters[i] + j;
-            if(validOptions[j-1][i] == 1){
+    console.log("drawing valid options");
+    for(i = 0; i < 8; i++){
+        for(j = 0; j < 8; j++){
+            var id = letters[i] + (j+1);
+            if(validOptions[i][j] == 1){
                 document.getElementById(id).style.backgroundImage = "url('images/vmove.png')";
             }
         }
@@ -75,14 +78,32 @@ function drawValidOptions(validOptions){
 }
 
 function removeValidOptions(validOptions){
-    for(i = 0; i < validOptions.length; i++){
-        for(j=1; j<= validOptions.length; j++){
-            var id = letters[i] + j;
-            if(validOptions[j-1][i] == 1){
+    console.log("removing the valid options");
+    for(i = 0; i < 8; i++){
+        for(j = 0; j < 8; j++){
+            var id = letters[i] + (j+1);
+            if(validOptions[i][j] == 1){
                 document.getElementById(id).style.backgroundImage = "none";
             }
         }
     }
+}
+
+function calculateScore(){
+    blackScore = 0;
+    whiteScore = 0;
+    for(i = 0; i < 8; i++){
+        for(j=1; j<= currentBoard[i].length; j++){
+            var id = letters[i] + j;
+            if(currentBoard[j-1][i] == 1){
+                blackScore++;
+            } else if(currentBoard[j-1][i] == -1){
+                whiteScore++;
+            }
+        }
+    }
+    document.getElementById("player1score").innerHTML = whiteScore;
+    document.getElementById("player2score").innerHTML = blackScore;
 }
 
 socket.onmessage = function incoming(message) {
@@ -91,9 +112,12 @@ socket.onmessage = function incoming(message) {
     if(mesObj.type == "board"){
         createBoard(mesObj.board);
         currentBoard = mesObj.board;
+        calculateScore();
     } else if(mesObj.type == "gameStart"){
         player = mesObj.player;
         createBoard(mesObj.board);
+        currentBoard = mesObj.board;
+        calculateScore();
         if(player == "A"){
             document.getElementById("player1type").innerHTML = "You";
             document.getElementById("player2type").innerHTML = "Opponent";
@@ -105,7 +129,7 @@ socket.onmessage = function incoming(message) {
             myTurn = true;
             console.log(myTurn);
             validOptions = mesObj.valid;
-            drawValidOptions(validOptions);
+            drawValidOptions(mesObj.valid);
     }
 }
 
