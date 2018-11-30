@@ -57,7 +57,16 @@ wss.on("connection", function(ws) {
             console.log(playerType);
             //console.log("\t[move]Player " + playerType + " made the following move: " + mesObj.x + mesObj.y);
             if(playerType == "A") {
-                console.log(gameObj.gameState.getValidMove(mesObj.x, mesObj.y, color));
+                gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y);
+                gameObj.updateValidMoves(gameObj.board, color);
+                gameObj.updateValidMoves(gameObj.board, color*-1);
+                gameObj.playerA.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
+                gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
+                if(gameObj.gameState.canMove(color*-1)) {
+                    gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)));
+                } else {
+                    gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesBlack)));
+                }
             } else {
                 gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y);
                 gameObj.updateValidMoves(gameObj.board, color);
