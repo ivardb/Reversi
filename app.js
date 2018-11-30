@@ -65,10 +65,10 @@ wss.on("connection", function(ws) {
                 gameObj.playerA.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
                 gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
                 if(gameObj.gameState.canMove(color*-1)) {
-                    gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)));
+                    gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesBlack)));
                     console.log("Player B turn");
                 } else {
-                    gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesBlack)));
+                    gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)));
                     console.log("Player A turn");
                 }
             } else {
