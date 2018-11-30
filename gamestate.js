@@ -7,6 +7,8 @@ var game = function() {
     this.nickNameA = null; //nicknames
     this.nickNameB = null;
     this.awaitingMove = false; //signals to the client if it is expecting a move or not
+    this.updateMoves = updateMoves;
+    this.getValidMove = getValidMove;
 }
 function updateMoves(x, y, color) {
     if(color == 1) {
@@ -14,5 +16,18 @@ function updateMoves(x, y, color) {
     } else {
         validMovesWhite[y][x] = 1;
     }
+}
+
+function getValidMove(x, y, color) {
+    if(color == -1) {
+        if(validMovesWhite[x][y] == 1) {
+            return true;
+        }
+    } else {
+        if(validMovesBlack[x][y] == 1) {
+            return true;
+        }
+    }
+    return false;
 }
 module.exports = game;

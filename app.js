@@ -39,15 +39,22 @@ wss.on("connection", function(ws) {
     initConnect.player = connect(ws);
     initConnect.type = "gameStart";
     initConnect.board = websockets[ws].board.boardArray;
+    console.log(JSON.stringify(initConnect));
     ws.send(JSON.stringify(initConnect));
 
     ws.on("message", function incoming(message) {
         console.log("[LOG] " + message);
+        var gameObj  = websockets[ws];
         var mesObj = JSON.parse(message);
         var playerType = mesObj.player;
         var messageType = mesObj.type;
         if(mesObj.type == "move") {
-            console.log("Player " + playerType + " made the following move: " + mesObj.move);
+            console.log("\t[move]Player " + playerType + " made the following move: " + mesObj.x + mesObje.y);
+            if(playerType == "A") {
+                gameObj.gameState.getValidMove(mesObj.x, mesObj.y, 1);
+            } else {
+                gameObj.gameState.getValidMove(mesObj.x, mesObj.y, -1);
+            }
         }
         if(mesObj.type == "concede") {
 
