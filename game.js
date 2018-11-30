@@ -72,7 +72,7 @@ game.prototype.setStatus = function (w) {
 
     if (game.prototype.isValidState(w) && game.prototype.isValidTransition(this.generalState, w)) {
         this.generalState = w;
-        console.log("[STATUS] %s", this.generalState);
+        console.log("[STATUS: " + this.id+ "] %s", this.generalState);
     }
     else {
         return new Error("Impossible status change from %s to %s", this.generalState, w);

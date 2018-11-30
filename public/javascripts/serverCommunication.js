@@ -1,4 +1,4 @@
-var socket = new WebSocket("ws://localhost:3000");
+var socket = new WebSocket("ws://192.168.2.10:3000");
 var letters = new Array("A", "B", "C", "D", "E", "F", "G", "H");
 var player = null;
 var myTurn = false;
