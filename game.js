@@ -13,6 +13,7 @@ var game = function(gameID) {
     this.capture = game.prototype.capture;
     this.updateValidMoves(this.board, 1);
     this.updateValidMoves(this.board, -1);
+    this.setStatus = game.prototype.setStatus;
 };
 
 //all possible states of the game, more detailed states will be in the gameState object

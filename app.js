@@ -67,9 +67,11 @@ wss.on("connection", function(ws) {
                 if(gameObj.gameState.canMove(color*-1)) {
                     gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesBlack)));
                     console.log("Player B turn");
-                } else {
+                } else if(gameObj.gameState.canMove(color)) {
                     gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)));
                     console.log("Player A turn");
+                } else {
+                    endGame(gameObj);
                 }
             } else {
                 gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y);
@@ -81,14 +83,22 @@ wss.on("connection", function(ws) {
                 if(gameObj.gameState.canMove(color*-1)) {
                     gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)));
                     console.log("Player A turn");
-                } else {
+                } else if(gameObj.gameState.canMove(color)) {
                     gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesBlack)));
                     console.log("Player B turn");
+                } else {
+                    endGame(gameObj);
                 }
             }
         }
         if(mesObj.type == "concede") {
-
+            if(ws == gameObj.playerA) {
+                endGame(gameObj, "B");
+                gameObj.setStatus("B");
+            } else {
+                endGame(gameObj, "A");
+                gameObj.setStatus("A");
+            }
         }
     });
 });
@@ -104,4 +114,22 @@ function connect(ws) {
     }
     return player;
 }
+
+function endGame(gameObj, winner) {
+    if(winner == undefined) {
+        winner = "draw";
+        if(gameObj.gameState.scorePlayerA>gameObj.gameState.scorePlayerB) {
+            winner = "A";
+            gameObj.setStatus("A");
+        } else if(gameObj.gameState.scorePlayerB>gameObj.gameState.scorePlayerA) {
+            winner = "B";
+            gameObj.setStatus("B");
+        }
+    }
+    gameEndMessage = messages.gameEnd(winner, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB);
+    gameObj.playerA.send(gameEndMessage);
+    gameObj.playerB.send(gameEndMessage);
+
+}
+
 server.listen(port);
