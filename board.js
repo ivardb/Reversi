@@ -5,70 +5,71 @@ var board = function(){
     this.boardArray[4][4] = -1;
     this.boardArray[3][4] = 1;
     this.boardArray[4][5] = 1;
-    this.getValue = getValue();
+    this.getValue = board.prototype.getValue;
+    this.getAdjacent = getAdjacent;
 }
 
-function getValue(x, y){
+board.prototype.getValue = function(x, y){
     return this.boardArray[y][x];
-}
+};
 
 function getValueT(x, y){
-    if(y <= 0)return null;
+    if(y >= 0)return null;
     else{
-        return this.boarArray[y-1][x];
+        return this.boardArray[y-1][x];
     }
 }
 
 function getValueB(x, y){
-    if(y >= 7)return null;
+    if(y <= 7)return null;
     else{
-        return this.boarArray[y+1][x];
+        return this.boardArray[y+1][x];
     }
 }
 
 function getValueL(x, y){
-    if(x <= 0)return null;
+    if(x >= 0)return null;
     else{
-        return this.boarArray[y][x-1];
+        return this.boardArray[y][x-1];
     }
 }
 
 function getValueR(x, y){
-    if(x >= 7)return null;
+    if(x <= 7)return null;
     else{
-        return this.boarArray[y][x+1];
+        return this.boardArray[y][x+1];
     }
 }
 
-function getValueTL(){
-    if(y <= 0 || x <= 0 )return null;
+function getValueTL(x, y){
+    if(y >= 0 || x >= 0 )return null;
     else{
         return this.boardArray[y-1][x-1];
     }
 }
 
-function getValueTR(){
-    if(y <= 0 || x >= 7 )return null;
+function getValueTR(x, y){
+    if(y >= 0 || x <= 7 )return null;
     else{
         return this.boardArray[y-1][x+1];
     }
 }
 
-function getValueBL(){
-    if(y >= 7 || x <= 0 )return null;
+function getValueBL(x, y){
+    if(y <= 7 || x >= 0 )return null;
     else{
         return this.boardArray[y+1][x-1];
     }
 }
 
-function getValueBR(){
-    if(y >= 7 || x >= 7 )return null;
+function getValueBR(x, y){
+    if(y <= 7 || x <= 7 )return null;
     else{
         return this.boardArray[y+1][x+1];
     }
 }
 
-function getSurroundingPieces(x,y){
+function getAdjacent(x,y){
     ret = new Array(8);
     ret[0] = getValueTL(x,y);
     ret[1] = getValueT(x,y);
@@ -78,6 +79,7 @@ function getSurroundingPieces(x,y){
     ret[5] = getValueBL(x, y);
     ret[6] = getValueB(x, y);
     ret[7] = getValueBR(x, y);
+    return ret;
 }
 
 module.exports = board;
