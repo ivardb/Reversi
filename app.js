@@ -37,9 +37,11 @@ setInterval(function() {
 wss.on("connection", function(ws) {
     console.log("Connection established");
     var gameStartObj = messages.gameStart(connect(ws), websockets[ws].board.boardArray);
-    ws.send(JSON.stringify(gameStartObj));
     if(gameStartObj.player == "B") {
+        websockets[ws].playerA.send(JSON.stringify(messages.gameStart("A", websockets[ws].board.boardArray)));
+        websockets[ws].playerB.send(JSON.stringify(messages.gameStart("B", websockets[ws].board.boardArray)));
         ws.send(JSON.stringify(messages.turn(websockets[ws].gameState.validMovesBlack)));
+        console.log("Player B turn");
     }  
 
     ws.on("message", function incoming(message) {
@@ -64,19 +66,24 @@ wss.on("connection", function(ws) {
                 gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
                 if(gameObj.gameState.canMove(color*-1)) {
                     gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)));
+                    console.log("Player B turn");
                 } else {
                     gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesBlack)));
+                    console.log("Player A turn");
                 }
             } else {
                 gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y);
                 gameObj.updateValidMoves(gameObj.board, color);
                 gameObj.updateValidMoves(gameObj.board, color*-1);
+                console.log(gameObj.gameState.validMovesBlack);
                 gameObj.playerA.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
                 gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
                 if(gameObj.gameState.canMove(color*-1)) {
                     gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)));
+                    console.log("Player A turn");
                 } else {
                     gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesBlack)));
+                    console.log("Player B turn");
                 }
             }
         }

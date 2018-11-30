@@ -33,10 +33,20 @@ function getValidMove(x, y, color) {
 }
 
 function canMove(color) {
+    var res = false;
     if(color == -1) {
-        return (this.validMovesWhite.includes(1));
+        for(i=0;i<8;i++) {
+            if(this.validMovesWhite[i].includes(1)) {
+                res = true;
+            }
+        }
     } else {
-        return (this.validMovesBlack.includes(1));
+        for(i=0;i<8;i++) {
+            if(this.validMovesBlack[i].includes(1)) {
+                res = true;
+            }
+        }
     }
+    return res;
 }
 module.exports = game;
