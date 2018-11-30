@@ -127,9 +127,9 @@ function endGame(gameObj, winner) {
         }
     }
     gameEndMessage = messages.gameEnd(winner, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB);
-    gameObj.playerA.send(gameEndMessage);
-    gameObj.playerB.send(gameEndMessage);
-
+    gameObj.playerA.send(JSON.stringify(gameEndMessage));
+    gameObj.playerB.send(JSON.stringify(gameEndMessage));
+    console.log(winner + " has won.");
 }
 
 server.listen(port);
