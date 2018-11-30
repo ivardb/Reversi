@@ -3,6 +3,7 @@ var http = require("http");
 var WebSocket = require("ws");
 var port = process.argv[2];
 var app = express();
+var game = require("./game");
 
 var indexRouter = require("./routes/index");
 
@@ -14,6 +15,8 @@ app.get("/", indexRouter);
 var server = http.createServer(app);
 
 const wss = new WebSocket.Server({server});
+var id = 0;
+var currentGame = new game(id++);
 
 var websockets = {}; //property websocket, value: game
 
@@ -32,15 +35,22 @@ setInterval(function() {
 
 wss.on("connection", function(ws) {
     console.log("Connection established");
+    var player = connect(ws);
+    ws.send(JSON.stringify(player));
 
     ws.on("message", function incoming(message) {
         console.log("[LOG] " + message);
-        let oMsg = JSON.parse(message);
- 
-        let gameObj = websockets[con.id];
-        let isPlayerA = (gameObj.playerA == con) ? true : false;
-        
+        var mesObj = JSON.parse(message);
+        var playerType = mesObj.player;
+        var messageType = mesObj.type;
+        if(mesObj.type == "move") {
+            console.log("Player " + playerType + " made the following move: " + mesObj.move);
+        }
+        if(mesObj.type == "concede") {
+
+        }
     });
 });
+
 
 server.listen(port);
