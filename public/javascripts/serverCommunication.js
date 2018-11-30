@@ -43,6 +43,7 @@ function setNamePlayer2(name){
 }
 
 function createBoard(boardArr){
+    console.log("creating board...");
     for(i = 0; i < boardArr.length; i++){
         for(j=1; j <= boardArr[i].length; j++){
             setValue(boardArr[i][j-1], letters[i] + j); 
@@ -52,12 +53,19 @@ function createBoard(boardArr){
 
 socket.onmessage = function incoming(message) {
     console.log(message);
-    var mesObj = JSON.parse(message);
+    var mesObj = JSON.parse(message.data);
     if(mesObj.type == "board"){
         createBoard(mesObj.board);
     } else if(mesObj.type == "gameStart"){
         player = mesObj.player;
         createBoard(mesObj.board);
+        if(player == "A"){
+            document.getElementById("player1type").innerHTML = "You";
+            document.getElementById("player2type").innerHTML = "Opponent";
+        } else if(player == "B"){
+            document.getElementById("player2type").innerHTML = "You";
+            document.getElementById("player1type").innerHTML = "Opponent"
+        }
     }
 }
 
