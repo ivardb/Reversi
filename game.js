@@ -177,13 +177,13 @@ game.prototype.checkValidCaptureSide = function(board, color, x,y,i) {
 }
 
 game.prototype.capture = function(board, color, x, y) {
-    board.setValue(board, x, y, color);
-    capArray = game.prototype.checkValidCaptureSide(board, color, x, y);
+    capArray = game.prototype.checkMove(board, color, x, y);
     for(var i = 0;i<8;i++) {
         if(capArray[i] == true) {
             game.prototype.captureOneSide(board, color, x, y, i);
         }
     }
+    board.setValue(board, x, y, color);
 };
 
 game.prototype.captureOneSide = function(board, color, x, y, i) {
