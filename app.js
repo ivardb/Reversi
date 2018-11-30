@@ -38,8 +38,8 @@ wss.on("connection", function(ws) {
     console.log("Connection established");
     var gameStartObj = messages.gameStart(connect(ws), websockets[ws].board.boardArray);
     if(gameStartObj.player == "B") {
-        websockets[ws].playerA.send(JSON.stringify(messages.gameStart("A", websockets[ws].board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)));
-        websockets[ws].playerB.send(JSON.stringify(messages.gameStart("B", websockets[ws].board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)));
+        websockets[ws].playerA.send(JSON.stringify(messages.gameStart("A", websockets[ws].board.boardArray, websockets[ws].gameState.scorePlayerA, websockets[ws].gameState.scorePlayerB)));
+        websockets[ws].playerB.send(JSON.stringify(messages.gameStart("B", websockets[ws].board.boardArray, websockets[ws].gameState.scorePlayerA, websockets[ws].gameState.scorePlayerB)));
         ws.send(JSON.stringify(messages.turn(websockets[ws].gameState.validMovesBlack)));
         console.log("Player B turn");
     }  
