@@ -111,14 +111,16 @@ socket.onmessage = function incoming(message) {
     console.log(message);
     var mesObj = JSON.parse(message.data);
     if(mesObj.type == "board"){
-        createBoard(mesObj.board);
-        currentBoard = mesObj.board;
         document.getElementById("player1score").innerHTML = mesObj.scoreA;
         document.getElementById("player2score").innerHTML = mesObj.scoreB;
+        createBoard(mesObj.board);
+        currentBoard = mesObj.board;
     } else if(mesObj.type == "gameStart"){
         player = mesObj.player;
         createBoard(mesObj.board);
         currentBoard = mesObj.board;
+        document.getElementById("player1score").innerHTML = mesObj.scoreA;
+        document.getElementById("player2score").innerHTML = mesObj.scoreB;
         if(player == "A"){
             document.getElementById("player1type").innerHTML = "You";
             document.getElementById("player2type").innerHTML = "Opponent";
@@ -126,8 +128,6 @@ socket.onmessage = function incoming(message) {
             document.getElementById("player2type").innerHTML = "You";
             document.getElementById("player1type").innerHTML = "Opponent";
         } 
-        document.getElementById("player1score").innerHTML = mesObj.scoreA;
-        document.getElementById("player2score").innerHTML = mesObj.scoreB;
         timer();
         for(i = 0; i < validOptions.length; i++){
         for(j=1; j<= validOptions.length; j++){
@@ -139,9 +139,17 @@ socket.onmessage = function incoming(message) {
 
     }
     } else if(mesObj.type="turn"){
-            myTurn = true;
-            console.log(myTurn);
-            validOptions = mesObj.valid;
-            drawValidOptions(mesObj.valid);
+        myTurn = true;
+        console.log(myTurn);
+        validOptions = mesObj.valid;
+        drawValidOptions(mesObj.valid);
+    } else if(mesObj.type="gameEnd"){
+        if(mesObj.ending == player){
+            window.alert("You won!");
+        } else if(mesObj.ending == "draw"){
+            window.alert("Draw!");
+        } else {
+            window.alert("You lost!");
+        }
     }
 }
