@@ -10,6 +10,7 @@ var game = function() {
     this.updateMoves = updateMoves;
     this.getValidMove = getValidMove;
     this.canMove = canMove;
+    this.clear = clear;
 }
 function updateMoves(x, y, color) {
     if(color == 1) {
@@ -48,5 +49,14 @@ function canMove(color) {
         }
     }
     return res;
+}
+
+function clear() {
+    for(i=0;i<8;i++) {
+        for(j=0;j<8;j++) {
+            this.validMovesBlack[i][j] = 0;
+            this.validMovesWhite[i][j] = 0;
+        }
+    }
 }
 module.exports = game;
