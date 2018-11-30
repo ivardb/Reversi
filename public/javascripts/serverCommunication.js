@@ -2,20 +2,34 @@ var socket = new WebSocket("ws://localhost:3000");
 var letters = new Array("A", "B", "C", "D", "E", "F", "G", "H");
 var player = null;
 var myTurn = false;
+var validOptions = null;
+var currentBoard = null;
 
 $("#boardTable tr td").click(function(event){
     if(myTurn === true){
         myTurn = false;
         var id = String(event.target.id);
         console.log(id);
-        var yLoc = letters.indexOf(id.charAt(0)); //x and y where wrong
-        var xLoc = parseInt(id.charAt(1))-1;
-        console.log(xLoc);
-        console.log(yLoc);
-        var move = {type:"move", player:player, x:xLoc, y:yLoc};
-        socket.send(JSON.stringify(move));
+        move(id);
+    } else {
+        window.alert("Not your turn!");
     }
 });
+
+function move(loc){
+    removeValidOptions(validOptions);
+    var yLoc = letters.indexOf(loc.charAt(0));
+    var xLoc = parseInt(loc.charAt(1))-1;
+    if(validOptions[yLoc][xLoc] == 1){
+        var move = {type:"move", player:player, x:xLoc, y:yLoc};
+        socket.send(JSON.stringify(move));
+        validOptions = null;
+    } else {
+        window.alert("Not a valid option!");
+        myTurn = true;
+        drawValidOptions(validOptions);
+    }
+}
 
 function setValue(value, location){
     if(value == 1){
@@ -49,18 +63,40 @@ function createBoard(boardArr){
     }
 }
 
+function drawValidOptions(validOptions){
+    for(i = 0; i < validOptions.length; i++){
+        for(j=1; j<= validOptions.length; j++){
+            var id = letters[i] + j;
+            if(validOptions[j-1][i] == 1){
+                document.getElementById(id).style.backgroundImage = "url('images/vmove.png')";
+            }
+        }
+    }
+}
+
+function removeValidOptions(validOptions){
+    for(i = 0; i < validOptions.length; i++){
+        for(j=1; j<= validOptions.length; j++){
+            var id = letters[i] + j;
+            if(validOptions[j-1][i] == 1){
+                document.getElementById(id).style.backgroundImage = "none";
+            }
+        }
+    }
+}
+
 socket.onmessage = function incoming(message) {
     console.log(message);
     var mesObj = JSON.parse(message.data);
     if(mesObj.type == "board"){
         createBoard(mesObj.board);
+        currentBoard = mesObj.board;
     } else if(mesObj.type == "gameStart"){
         player = mesObj.player;
         createBoard(mesObj.board);
         if(player == "A"){
             document.getElementById("player1type").innerHTML = "You";
             document.getElementById("player2type").innerHTML = "Opponent";
-
         } else if(player == "B"){
             document.getElementById("player2type").innerHTML = "You";
             document.getElementById("player1type").innerHTML = "Opponent";
@@ -68,7 +104,8 @@ socket.onmessage = function incoming(message) {
     } else if(mesObj.type="turn"){
             myTurn = true;
             console.log(myTurn);
-            var validOptions = mesObj.valid;
+            validOptions = mesObj.valid;
+            drawValidOptions(validOptions);
     }
 }
 
