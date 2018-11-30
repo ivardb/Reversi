@@ -15,6 +15,9 @@ function setValue(board, x, y, color) {
 }
 
 function getValue(board, x, y){
+    if(y>7||y<0||x>7||x<0) {
+        return undefined;
+    }
     return board.boardArray[y][x];
 };
 
