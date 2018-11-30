@@ -54,7 +54,7 @@ socket.onmessage = function incoming(message) {
     if(mesObj.type === "board"){
         var boardArr = mesObj.board;
         createBoard(boardArr);
-    } else id
+    } 
 }
 
 function testBoard(){
