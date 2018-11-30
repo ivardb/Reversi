@@ -7,6 +7,11 @@ var board = function(){
     this.boardArray[3][3] = -1;
     this.getValue = board.prototype.getValue;
     this.getAdjacent = getAdjacent;
+    this.setValue = setValue;
+}
+
+function setValue(board, x, y, color) {
+    board.boardArray[y][x] = color;
 }
 
 board.prototype.getValue = function(board, x, y){

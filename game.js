@@ -10,6 +10,7 @@ var game = function(gameID) {
     this.board = new boardObj();
     this.addPlayer = game.prototype.addPlayer;
     this.updateValidMoves = game.prototype.updateValidMoves;
+    this.capture = game.prototype.capture;
     this.updateValidMoves(this.board, 1);
     this.updateValidMoves(this.board, -1);
 };
@@ -173,6 +174,50 @@ game.prototype.checkValidCaptureSide = function(board, color, x,y,i) {
         return true;
     }
     return false;
+}
+
+game.prototype.capture = function(board, color, x, y) {
+    board.setValue(board, x, y, color);
+    capArray = game.prototype.checkValidCaptureSide(board, color, x, y);
+    for(var i = 0;i<8;i++) {
+        if(capArray[i] == true) {
+            game.prototype.captureOneSide(board, color, x, y, i);
+        }
+    }
+};
+
+game.prototype.captureOneSide = function(board, color, x, y, i) {
+    var dx=0;
+    var dy=0;
+    switch(i) {
+        case 0: dx=-1;
+                dy=-1;
+                break;
+        case 1: dy=-1;
+                break;
+        case 2: dx=1;
+                dy=-1;
+                break;
+        case 3: dx=-1;
+                break;
+        case 4: dx=1;
+                break;
+        case 5: dx=-1;
+                dy=1;
+                break;
+        case 6: dy=1;
+                break;
+        case 7: dx=1;
+                dy=1;
+                break;
+    }
+    y+=dy;
+    x+=dx;
+    while(board.getValue(board, x,y) == color*-1) {
+        board.setValue(board, x, y, color);
+        y+=dy;
+        x+=dx;
+    }
 }
 
 module.exports = game;

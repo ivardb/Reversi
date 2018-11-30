@@ -20,14 +20,22 @@ function updateMoves(x, y, color) {
 
 function getValidMove(x, y, color) {
     if(color == -1) {
-        if(this.validMovesWhite[x][y] == 1) {
+        if(this.validMovesWhite[y][x] == 1) {
             return true;
         }
     } else {
-        if(this.validMovesBlack[x][y] == 1) {
+        if(this.validMovesBlack[y][x] == 1) {
             return true;
         }
     }
     return false;
+}
+
+function canMove(color) {
+    if(color == -1) {
+        return (this.validMovesWhite.includes(1));
+    } else {
+        return (this.validMovesBlack.includes(1));
+    }
 }
 module.exports = game;

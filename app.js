@@ -48,12 +48,24 @@ wss.on("connection", function(ws) {
         var mesObj = JSON.parse(message);
         var playerType = mesObj.player;
         var messageType = mesObj.type;
+        if(playerType == "A") {
+            var color = -1;
+        } else {
+            var color = 1;
+        }
         if(mesObj.type == "move") {
             //console.log("\t[move]Player " + playerType + " made the following move: " + mesObj.x + mesObj.y);
             if(playerType == "A") {
-                console.log(gameObj.gameState.getValidMove(mesObj.x, mesObj.y, -1));
+                console.log(gameObj.gameState.getValidMove(mesObj.x, mesObj.y, color));
             } else {
-                console.log(gameObj.gameState.getValidMove(mesObj.x, mesObj.y, 1));
+                gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y);
+                gameObj.updateValidMoves(gameObj.board, color);
+                gameObj.updateValidMoves(gameObj.board, color*-1);
+                if(canMove(color*-1)) {
+                    gameObj.playerA.send(messages.turn(gameObj.gameState.validMovesWhite));
+                } else {
+                    gameObj.playerB.send(messages.turn(gameObj.gameState.validMovesWhite));
+                }
             }
         }
         if(mesObj.type == "concede") {
