@@ -9,6 +9,7 @@ var game = function() {
     this.awaitingMove = false; //signals to the client if it is expecting a move or not
     this.updateMoves = updateMoves;
     this.getValidMove = getValidMove;
+    this.calculateScore = calculateScore;
     this.canMove = canMove;
     this.clear = clear;
 }

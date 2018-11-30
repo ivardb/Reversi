@@ -75,6 +75,7 @@ wss.on("connection", function(ws) {
                 }
             } else {
                 gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y);
+                gameObj.gameState.calculateScore();
                 gameObj.gameState.clear();
                 gameObj.updateValidMoves(gameObj.board, color);
                 gameObj.updateValidMoves(gameObj.board, color*-1);
@@ -115,16 +116,17 @@ function connect(ws) {
     return player;
 }
 
-function endGame(gameObj, winner) {
-    if(winner == undefined) {
-        winner = "draw";
-        if(gameObj.gameState.scorePlayerA>gameObj.gameState.scorePlayerB) {
-            winner = "A";
-            gameObj.setStatus("A");
-        } else if(gameObj.gameState.scorePlayerB>gameObj.gameState.scorePlayerA) {
-            winner = "B";
-            gameObj.setStatus("B");
-        }
+function endGame(gameObj) {
+    winner = "draw";
+    if(gameObj.gameState.scorePlayerA>gameObj.gameState.scorePlayerB) {
+        winner = "A";
+        gameObj.setStatus("A");
+    } else if(gameObj.gameState.scorePlayerB>gameObj.gameState.scorePlayerA) {
+        winner = "B";
+        gameObj.setStatus("B");
+    }
+    if(arguments[1] != undefined) {
+        winner = argument[1];
     }
     gameEndMessage = messages.gameEnd(winner, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB);
     gameObj.playerA.send(JSON.stringify(gameEndMessage));
