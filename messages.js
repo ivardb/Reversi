@@ -1,8 +1,10 @@
-function gameStart(player, board) {
+function gameStart(player, board, scoreA, scoreB) {
     var ret = {};
     ret.type = "gameStart";
     ret.player = player;
     ret.board = board;
+    ret.scoreA = scoreA;
+    ret.scoreB = scoreB;
     return ret;
 }
 
@@ -13,11 +15,17 @@ function turn(validMoves) {
     return ret;
 }
 
-function board(board) {
+function board(board, scoreA, scoreB) {
     var ret = {};
     ret.type = "board";
     ret.board = board;
+    ret.scoreA = scoreA;
+    ret.scoreB = scoreB;
     return ret;
+}
+
+function gameEnd() {
+    
 }
 
 exports.gameStart = gameStart;

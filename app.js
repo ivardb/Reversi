@@ -38,14 +38,14 @@ wss.on("connection", function(ws) {
     console.log("Connection established");
     var gameStartObj = messages.gameStart(connect(ws), websockets[ws].board.boardArray);
     if(gameStartObj.player == "B") {
-        websockets[ws].playerA.send(JSON.stringify(messages.gameStart("A", websockets[ws].board.boardArray)));
-        websockets[ws].playerB.send(JSON.stringify(messages.gameStart("B", websockets[ws].board.boardArray)));
+        websockets[ws].playerA.send(JSON.stringify(messages.gameStart("A", websockets[ws].board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)));
+        websockets[ws].playerB.send(JSON.stringify(messages.gameStart("B", websockets[ws].board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)));
         ws.send(JSON.stringify(messages.turn(websockets[ws].gameState.validMovesBlack)));
         console.log("Player B turn");
     }  
 
     ws.on("message", function incoming(message) {
-        //console.log("[LOG] " + message);
+        console.log("[LOG] " + message);
         var gameObj  = websockets[ws];
         var mesObj = JSON.parse(message);
         var playerType = mesObj.player;
@@ -57,14 +57,13 @@ wss.on("connection", function(ws) {
         }
         if(mesObj.type == "move") {
             console.log(playerType);
-            //console.log("\t[move]Player " + playerType + " made the following move: " + mesObj.x + mesObj.y);
             if(playerType == "A") {
                 gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y);
                 gameObj.gameState.clear();
                 gameObj.updateValidMoves(gameObj.board, color);
                 gameObj.updateValidMoves(gameObj.board, color*-1);
-                gameObj.playerA.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
-                gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
+                gameObj.playerA.send(JSON.stringify(messages.board(gameObj.board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)));
+                gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)));
                 if(gameObj.gameState.canMove(color*-1)) {
                     gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesBlack)));
                     console.log("Player B turn");
@@ -77,9 +76,8 @@ wss.on("connection", function(ws) {
                 gameObj.gameState.clear();
                 gameObj.updateValidMoves(gameObj.board, color);
                 gameObj.updateValidMoves(gameObj.board, color*-1);
-                console.log(gameObj.gameState.validMovesBlack);
-                gameObj.playerA.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
-                gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray)));
+                gameObj.playerA.send(JSON.stringify(messages.board(gameObj.board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)));
+                gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)));
                 if(gameObj.gameState.canMove(color*-1)) {
                     gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)));
                     console.log("Player A turn");

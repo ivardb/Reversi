@@ -1,6 +1,6 @@
 var game = function() {
-    this.scorePlayer1=2;
-    this.scorePlayer2=2;
+    this.scorePlayerA=2;
+    this.scorePlayerB=2;
     this.state = "Starting"; //other possibilities are turnWhite, turnBlack;
     this.validMovesBlack = [[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]];
     this.validMovesWhite = [[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]];
@@ -57,6 +57,23 @@ function clear() {
             this.validMovesBlack[i][j] = 0;
             this.validMovesWhite[i][j] = 0;
         }
+    }
+}
+
+function calculateScore(board){
+    var scoreA=0;
+    var scoreB=0;
+    boardArray = board.boardArray;
+    for(i=0;i<8;i++) {
+        for(j=0;j<8;j++) {
+            if(boardArray[i][j] == 1) {
+                scoreB++;
+            } else if(boardArray[i][j] == -1) {
+                scoreA++;
+            }
+        }
+        this.scorePlayerA = scoreA;
+        this.scorePlayerB = scoreB;
     }
 }
 module.exports = game;
