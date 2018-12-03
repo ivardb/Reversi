@@ -25,28 +25,27 @@
 				<table>
 					<tr id="lbheader"><th>Name</th><th>Points</th></tr>
 					<!--Some of the id's might not be necessary, remove if not needed-->
-					<tr id="lb0"><td id="name0">-</td><td id="points0">-</td></tr>
-					<tr id="lb1"><td id="name1">-</td><td id="points1">-</td></tr>
-					<tr id="lb2"><td id="name2">-</td><td id="points2">-</td></tr>
-					<tr id="lb3"><td id="name3">-</td><td id="points3">-</td></tr>
-					<tr id="lb4"><td id="name4">-</td><td id="points4">-</td></tr>
-					<tr id="lb5"><td id="name5">-</td><td id="points5">-</td></tr>
-					<tr id="lb6"><td id="name6">-</td><td id="points6">-</td></tr>
-					<tr id="lb7"><td id="name7">-</td><td id="points7">-</td></tr>
-					<tr id="lb8"><td id="name8">-</td><td id="points8">-</td></tr>
-					<tr id="lb9"><td id="name9">-</td><td id="points9">-</td></tr>
+					<tr id="lb0"><td id="name0">-</td><td><%= lb1%></td></tr>
+					<tr id="lb1"><td id="name1">-</td><td><%= lb2%></td></tr>
+					<tr id="lb2"><td id="name2">-</td><td><%= lb3%></td></tr>
+					<tr id="lb3"><td id="name3">-</td><td><%= lb4%></td></tr>
+					<tr id="lb4"><td id="name4">-</td><td><%= lb5%></td></tr>
+					<tr id="lb5"><td id="name5">-</td><td><%= lb6%></td></tr>
+					<tr id="lb6"><td id="name6">-</td><td><%= lb7%></td></tr>
+					<tr id="lb7"><td id="name7">-</td><td><%= lb8%></td></tr>
+					<tr id="lb8"><td id="name8">-</td><td><%= lb9%></td></tr>
+					<tr id="lb9"><td id="name9">-</td><td><%= lb10%></td></tr>
 				</table>
 			</div>
 		</section>
 		<section id="mainleft">
 		<div id="stats">
-			<h3 id="statstitle">
+			<h3 id="statstitle">Stats</h3>
 			<table>
-				<tr><th>Players online</th><td>-</td></tr>
-				<tr><th>Ongoing games</th><td>-</td></tr>
-				<tr><th>Finished games</th><td>-</td></tr>
-				<tr><th>Wins by black</th><td>-</td></tr>
-				<tr><th>Wins by white</th><td>-</td></tr>
+				<tr><th>Ongoing games</th><td><%= ongoingGames%></td></tr>
+				<tr><th>Started games</th><td><%+ initializedGames></td></tr>
+				<tr><th>Wins by black</th><td><%= blackWins></td></tr>
+				<tr><th>Wins by white</th><td><%= whiteWins></td></tr>
 			</table>
 		</div>
 		</section>
