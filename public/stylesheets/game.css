@@ -123,11 +123,11 @@
 }
 
 #popup p{
-	top: 0px;
+	top: 1vh;
 	width: 100%;
-	height: 5vh;
+	height: 10vh;
 	text-align: center;
-	font-size: 4vw;
+	font-size: 10vh;
 }
 
 #popup a{
@@ -141,6 +141,6 @@
 	background-color: #0D9620;
 	text-decoration: none;
 	text-align: center;
-	font-size: 3vw;
+	font-size: 4vh;
 	color: #FFFFFF; 
 }
