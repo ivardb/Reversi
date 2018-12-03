@@ -124,12 +124,14 @@ wss.on('connection', function (ws) {
                     if (mesObj.player === 'A') {
                         gameObj.nickNameA = mesObj.nickname
                         if (gameObj.nickNameB !== null) {
-                            messages.nickNames(gameObj.nickNameA, gameObj.nickNameB)
+                            gameObj.playerA.send(JSON.stringify(messages.nickNames(gameObj.nickNameA, gameObj.nickNameB)))
+                            gameObj.playerB.send(JSON.stringify(messages.nickNames(gameObj.nickNameA, gameObj.nickNameB)))
                         }
                     } else if (mesObj.player === 'B') {
                         gameObj.nickNameB = mesObj.nickname
                         if (gameObj.nickNameA !== null) {
-                            messages.nickNames(gameObj.nickNameA, gameObj.nickNameB)
+                            gameObj.playerA.send(JSON.stringify(messages.nickNames(gameObj.nickNameA, gameObj.nickNameB)))
+                            gameObj.playerB.send(JSON.stringify(messages.nickNames(gameObj.nickNameA, gameObj.nickNameB)))
                         }
                     }
                 }
