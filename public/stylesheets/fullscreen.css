@@ -1,0 +1,25 @@
+#gameleft, #gameright{
+    top: 0px;
+}
+
+#boardTable{
+    height: 80vh;
+    width: 80vh;
+    margin-left: -40vh;
+    left: 50%;
+    top: 10vh;
+}
+
+#clock{
+    top: 1vh;
+}
+
+#boardTable tr{
+    height: 10vh;
+    width: 80vh;
+}
+
+#boardTable tr td{
+    height: 10vh;
+    width: 10vh;
+}
