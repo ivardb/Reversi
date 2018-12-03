@@ -27,6 +27,11 @@ function move (loc) {
     }
 }
 
+function sendName () {
+    let nickname = { type: 'nickname', nickname: 'pipo', player: player }
+    socket.send(JSON.stringify(nickname))
+}
+
 function setValue (value, location) {
     if (value === 1) {
         document.getElementById(location).style.backgroundImage = "url('/images/BlackPiece.png')"
@@ -107,18 +112,9 @@ socket.onmessage = function incoming (message) {
             document.getElementById('player2type').innerHTML = 'You'
             document.getElementById('player1type').innerHTML = 'Opponent'
         }
-        timer()
-        for (let i = 0; i < validOptions.length; i++) {
-            for (let j = 1; j <= validOptions.length; j++) {
-                let id = letters[i] + j
-                if (validOptions[j - 1][i] === 1) {
-                    document.getElementById(id).style.backgroundImage = 'none'
-                }
-            }
-        }
+        sendName()
     } else if (mesObj.type === 'turn') {
         myTurn = true
-        console.log(myTurn)
         validOptions = mesObj.valid
         drawValidOptions(mesObj.valid)
     } else if (mesObj.type === 'gameEnd') {
@@ -128,6 +124,19 @@ socket.onmessage = function incoming (message) {
             window.alert('Draw!')
         } else {
             window.alert('You lost!')
+        }
+    } else if (mesObj.type === 'nicknames') {
+        console.log("message")
+        document.getElementById('player1name').innerHTML = mesObj.nickA
+        document.getElementById('player2name').innerHTML = mesObj.nickB
+        timer()
+        for (let i = 0; i < validOptions.length; i++) {
+            for (let j = 1; j <= validOptions.length; j++) {
+                let id = letters[i] + j
+                if (validOptions[j - 1][i] === 1) {
+                    document.getElementById(id).style.backgroundImage = 'none'
+                }
+            }
         }
     }
 }
