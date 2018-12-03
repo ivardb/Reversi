@@ -8,10 +8,7 @@ $('#boardTable tr td').click(function (event) {
     if (myTurn === true) {
         myTurn = false
         var id = String(event.target.id)
-        console.log(id)
         move(id)
-    } else {
-        window.alert('Not your turn!')
     }
 })
 
@@ -47,7 +44,6 @@ function createBoard (boardArr) {
 }
 
 function drawValidOptions (validOptions) {
-    console.log('drawing valid options')
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
             var id = letters[i] + (j + 1)
@@ -59,7 +55,6 @@ function drawValidOptions (validOptions) {
 }
 
 function removeValidOptions (validOptions) {
-    console.log('removing the valid options')
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
             var id = letters[i] + (j + 1)
@@ -70,18 +65,39 @@ function removeValidOptions (validOptions) {
     }
 }
 
+function popup (win) {
+    let popup = document.createElement('div')
+    popup.id = 'popup'
+    let header = document.createElement('p')
+    let visual = document.createElement('div')
+    let button = document.createElement('a')
+    button.innerHTML = 'Play again!'
+    button.href = '/'
+    if (win === 1) {
+        visual.id = 'win'
+        header.innerHTML = 'You won!'
+    } else if (win === -1) {
+        visual.id = 'loss'
+        header.innerHTML = 'You lost!'
+    } else if (win === 0) {
+        visual.id = 'draw'
+        header.innerHTML = 'Draw!'
+    }
+    popup.appendChild(header)
+    popup.appendChild(visual)
+    popup.appendChild(button)
+    document.getElementsByTagName('main')[0].appendChild(popup)
+}
+
 socket.onmessage = function incoming (message) {
-    console.log(message)
     var mesObj = JSON.parse(message.data)
     if (mesObj.type === 'board') {
         document.getElementById('player1score').innerHTML = mesObj.scoreA
         document.getElementById('player2score').innerHTML = mesObj.scoreB
         createBoard(mesObj.board)
-        currentBoard = mesObj.board
     } else if (mesObj.type === 'gameStart') {
         player = mesObj.player
         createBoard(mesObj.board)
-        currentBoard = mesObj.board
         document.getElementById('player1score').innerHTML = mesObj.scoreA
         document.getElementById('player2score').innerHTML = mesObj.scoreB
         if (player === 'A') {
