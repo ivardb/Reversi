@@ -16,6 +16,9 @@ app.use(express.static(path.join(__dirname, '/public')))
 app.get('/play', indexRouter)
 app.get('/', indexRouter)
 
+app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, '/views'))
+
 var server = http.createServer(app)
 
 const wss = new WebSocket.Server({ server })
