@@ -115,7 +115,7 @@ wss.on('connection', function (ws) {
                     if (ws === gameObj.playerA) {
                         endGame(gameObj, 'B')
                         gameObj.setStatus('B')
-                    } else {
+                    } else if (ws === gameObj.playerB) {
                         endGame(gameObj, 'A')
                         gameObj.setStatus('A')
                     }
@@ -126,7 +126,7 @@ wss.on('connection', function (ws) {
                         if (gameObj.nickNameB !== null) {
                             messages.nickNames(gameObj.nickNameA, gameObj.nickNameB)
                         }
-                    } else {
+                    } else if (mesObj.player === 'B') {
                         gameObj.nickNameB = mesObj.nickname
                         if (gameObj.nickNameA !== null) {
                             messages.nickNames(gameObj.nickNameA, gameObj.nickNameB)
