@@ -1,37 +1,37 @@
 
-var board = function(){
-    this.boardArray = [[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]];
-    this.boardArray[4][3] = 1;
-    this.boardArray[3][4] = 1;
-    this.boardArray[4][4] = -1;
-    this.boardArray[3][3] = -1;
-    this.getValue = getValue;
-    this.getAdjacent = getAdjacent;
-    this.setValue = setValue;
+var board = function () {
+    this.boardArray = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
+    this.boardArray[4][3] = 1
+    this.boardArray[3][4] = 1
+    this.boardArray[4][4] = -1
+    this.boardArray[3][3] = -1
+    this.getValue = getValue
+    this.getAdjacent = getAdjacent
+    this.setValue = setValue
 }
 
-function setValue(board, x, y, color) {
-    board.boardArray[y][x] = color;
+function setValue (board, x, y, color) {
+    board.boardArray[y][x] = color
 }
 
-function getValue(board, x, y){
-    if(y>7||y<0||x>7||x<0) {
-        return undefined;
+function getValue (board, x, y) {
+    if (y > 7 || y < 0 || x > 7 || x < 0) {
+        return undefined
     }
-    return board.boardArray[y][x];
+    return board.boardArray[y][x]
 };
 
-function getValueT(board, x, y){
-    if(y <= 0)return null;
-    else{
-        return board.boardArray[y-1][x];
+function getValueT (board, x, y) {
+    if (y <= 0) return null
+    else {
+        return board.boardArray[y - 1][x]
     }
 }
 
-function getValueB(board, x, y){
-    if(y >= 7)return null;
-    else{
-        return board.boardArray[y+1][x];
+function getValueB (board, x, y) {
+    if (y >= 7) return null
+    else {
+        return board.boardArray[y + 1][x]
     }
 }
 
