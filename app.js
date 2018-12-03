@@ -142,8 +142,9 @@ wss.on('connection', function (ws) {
         }
     })
     ws.on('close', function () {
+        console.log('closing')
         let gameObj = websockets[con.id]
-        if (websockets[ws] !== undefined && !gameObj.finalStatus) {
+        if (websockets[con.id] !== undefined && !gameObj.finalStatus) {
             if (gameObj.playerA === ws) {
                 if (gameObj.playerB != null) {
                     gameObj.setStatus('B')

@@ -1,7 +1,6 @@
 var leaderboard = new Array(10)
 
 function addScore (nickname, score) {
-    console.log(nickname + ': ' + score)
     for (let i = 0; i < leaderboard.length; i++) {
         if (leaderboard[i] === undefined || score > leaderboard[i].score) {
             add(nickname, score, i)
@@ -12,7 +11,6 @@ function addScore (nickname, score) {
 }
 
 function add (nickname, score, position) {
-    console.log((position + 1) + ': ' + nickname + ', ' + score)
     let scoreObj = {}
     scoreObj.name = nickname
     scoreObj.score = score
