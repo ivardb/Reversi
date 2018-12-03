@@ -76,7 +76,7 @@ function popup (win) {
     let visual = document.createElement('div')
     let button = document.createElement('a')
     button.innerHTML = 'Play again!'
-    button.href = '/'
+    button.href = '/play'
     if (win === 1) {
         visual.id = 'win'
         header.innerHTML = 'You won!'
@@ -118,11 +118,11 @@ socket.onmessage = function incoming (message) {
         drawValidOptions(mesObj.valid)
     } else if (mesObj.type === 'gameEnd') {
         if (mesObj.ending === player) {
-            window.alert('You won!')
+            popup(1)
         } else if (mesObj.ending === 'draw') {
-            window.alert('Draw!')
+            popup(0)
         } else {
-            window.alert('You lost!')
+            popup(-1)
         }
     } else if (mesObj.type === 'nicknames') {
         console.log('message')
