@@ -4,12 +4,12 @@ var leaderboard = require('./../leaderboard')
 var stats = require('./../statTracker')
 
 /* GET home page. */
-router.get('/', function (req, res) {
-    res.sendFile('splash.html', { root: './public' })
+router.get('/play', function (req, res) {
+    res.sendFile('game.html', { root: './public' })
 })
 
 /* Pressing the 'PLAY' button, returns this page */
-router.get('/play', function (req, res) {
+router.get('/', function (req, res) {
     var board = leaderboard.returnParsed()
     res.render('splash.ejs', {
         ongoingGames: stats.ongoingGames,
