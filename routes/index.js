@@ -12,7 +12,6 @@ router.get('/play', function (req, res) {
 router.get('/', function (req, res) {
     var board = leaderboard.returnParsed()
     res.render('splash.ejs', {
-        ongoingGames: stats.ongoingGames,
         initializedGames: stats.gamesInitialized,
         blackWins: stats.blackVictories,
         whiteWins: stats.whiteVictories,

@@ -38,7 +38,6 @@ setInterval(function () {
             }
         }
     }
-    stats.ongoingGames = Math.floor(websockets.length / 2)
 }, 50000)
 
 wss.on('connection', function (ws) {
