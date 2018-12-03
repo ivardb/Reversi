@@ -21,7 +21,6 @@ function move (loc) {
         socket.send(JSON.stringify(move))
         validOptions = null
     } else {
-        window.alert('Not a valid option!')
         myTurn = true
         drawValidOptions(validOptions)
     }
@@ -102,7 +101,6 @@ socket.onmessage = function incoming (message) {
         createBoard(mesObj.board)
     } else if (mesObj.type === 'gameStart') {
         player = mesObj.player
-        createBoard(mesObj.board)
         document.getElementById('player1score').innerHTML = mesObj.scoreA
         document.getElementById('player2score').innerHTML = mesObj.scoreB
         if (player === 'A') {
@@ -113,6 +111,7 @@ socket.onmessage = function incoming (message) {
             document.getElementById('player1type').innerHTML = 'Opponent'
         }
         sendName()
+        createBoard(mesObj.board)
     } else if (mesObj.type === 'turn') {
         myTurn = true
         validOptions = mesObj.valid
@@ -126,17 +125,10 @@ socket.onmessage = function incoming (message) {
             window.alert('You lost!')
         }
     } else if (mesObj.type === 'nicknames') {
-        console.log("message")
+        console.log('message')
         document.getElementById('player1name').innerHTML = mesObj.nickA
         document.getElementById('player2name').innerHTML = mesObj.nickB
         timer()
-        for (let i = 0; i < validOptions.length; i++) {
-            for (let j = 1; j <= validOptions.length; j++) {
-                let id = letters[i] + j
-                if (validOptions[j - 1][i] === 1) {
-                    document.getElementById(id).style.backgroundImage = 'none'
-                }
-            }
-        }
+        drawValidOptions(validOptions)
     }
 }
