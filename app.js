@@ -55,10 +55,18 @@ wss.on("connection", function(ws) {
         console.log("Player B turn");
     }  
 
-    ws.on("message", function incoming(message) {
+    messageHandler: ws.on("message", function incoming(message) {
         console.log("[LOG:" + websockets[con.id].id + "] " + message);
         let gameObj  = websockets[con.id];
-        let mesObj = JSON.parse(message);
+        let mesObj;
+        try {
+            mesObj = JSON.parse(message);
+        } catch(e) {
+            break messageHandler;
+        }
+        if(!(mesObj.hasOwnProperty("type"))) {
+            break messageHandler;
+        }
         let playerType = mesObj.player;
         let messageType = mesObj.type;
         if(playerType == "A") {
@@ -66,7 +74,7 @@ wss.on("connection", function(ws) {
         } else {
             var color = 1;
         }
-        if(mesObj.type == "move") {
+        if(mesObj.type == "move") { 
             if(playerType == "A") {
                 gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y);
                 gameObj.gameState.calculateScore(gameObj.board);
