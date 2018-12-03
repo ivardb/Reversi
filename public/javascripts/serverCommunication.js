@@ -21,7 +21,6 @@ function move (loc) {
         socket.send(JSON.stringify(move))
         validOptions = null
     } else {
-        window.alert('Not a valid option!')
         myTurn = true
         drawValidOptions(validOptions)
     }
