@@ -16,5 +16,3 @@ function timer () {
         document.getElementById('clock').innerHTML = strHours + ':' + strMinutes + ':' + strSeconds
     }, 100)
 }
-
-module.exports = timer
