@@ -27,7 +27,7 @@ function move (loc) {
 }
 
 function sendName () {
-    let nickname = { type: 'nickname', nickname: 'pipo', player: player }
+    let nickname = { type: 'nickname', nickname: getCookie(), player: player }
     socket.send(JSON.stringify(nickname))
 }
 
@@ -131,4 +131,12 @@ socket.onmessage = function incoming (message) {
         timer()
         drawValidOptions(validOptions)
     }
+}
+
+function getCookie() {
+    var content = document.cookie
+    console.log(content)
+    content = content.replace('name:', '')
+    console.log(content)
+    return content
 }

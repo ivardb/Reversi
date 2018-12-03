@@ -3,6 +3,7 @@
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 	<link rel="stylesheet" type="text/css" href="stylesheets/splash.css">
 	<link rel="icon" type="image/png" sizes="192x192"  href="images/Favicons/android-icon-192x192.png">
+	<script type="text/javascript" src="javascripts/cookies.js"></script>
 </head>
 <body>
 	<header>
@@ -10,10 +11,14 @@
 		<h2>online multiplayer</h2>
 	</header>
 	<main>
-		<form>
-		<button id="playbutton" href="/play">
-			<div id="arrow_right"></div>
-		</button>
+		<section id="centersection">
+			<form>
+				<input id="playbutton" onclick="setCookie()">
+					<div id="arrow_right"></div>
+				</input>
+				<input type="text" placeholder="Nickname" id="nickname"></input>
+			</form>
+		</section>
 		<section id="mainright">
 			<div id="leaderbords">
 				<h3 id="lbtitle">Leaderbords</h3>
@@ -48,6 +53,6 @@
 	</main>
 	<footer>
 		<p id="copyRightInfo">Copyright 2018 Ivar de Bruin & Jaap de Jong</p>
-		<p id="versionInfo">Version: 1.0.0 (pre-alpha)</p>
+		<p id="versionInfo">Version: 0.100.6 (beta)</p>
 	</footer>
 </body>

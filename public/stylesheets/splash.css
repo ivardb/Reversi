@@ -10,22 +10,30 @@
 	left: 66vw;
 }
 
-#playbutton{
+#centersection{
 	position: fixed;
 	margin: 0px;
 	margin-top: -100px;
+	margin-left: -100px;
 	top: 50%;
 	left: 50%;
-	margin-left: -100px;
+	display: inline-block;
+	width: 200px;
+	padding: 0px;
+	border: 3px solid red;
+}
+
+#playbutton{
+	margin: 0px;
 	display: inline-block;
 	background-color: #43C12A;
 	height: 200px;
-	max-height: 200px;
 	width: 200px;
 	border-radius: 100px;
 	color: black;
 	padding: 0px;
 	border: none;
+	cursor: pointer;
 }
 
 #playbutton:hover{
@@ -38,6 +46,7 @@
 }
 	
 #arrow_right{
+	position: absolute;
 	width: 0; 
 	height: 0; 
 	border-top: 50px solid transparent;
@@ -45,4 +54,10 @@
 	border-left: 85px solid #080705;
 	margin: 50px;
 	margin-left: 70px;
+	top: 0px;
+	pointer-events: none;
 }	
+
+#nickname{
+	width: 200px;
+}
