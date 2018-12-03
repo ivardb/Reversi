@@ -33,7 +33,16 @@ function gameEnd (ending, scoreA, scoreB) {
     return ret
 }
 
+function nickNames (nickA, nickB) {
+    var ret = {}
+    ret.type = 'nicknames'
+    ret.nickA = nickA
+    ret.nickB = nickB
+    return ret
+}
+
 exports.gameStart = gameStart
 exports.turn = turn
 exports.board = board
 exports.gameEnd = gameEnd
+exports.nickNames = nickNames

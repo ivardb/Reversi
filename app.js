@@ -6,6 +6,7 @@ var app = express()
 var Game = require('./game')
 var messages = require('./messages')
 var path = require('path')
+var stats = require('./statTracker')
 
 var indexRouter = require('./routes/index')
 
@@ -17,8 +18,7 @@ app.get('/', indexRouter)
 var server = http.createServer(app)
 
 const wss = new WebSocket.Server({ server })
-var id = 0
-var currentGame = new Game(id++)
+var currentGame = new Game(stats.gamesInitialized++)
 
 var websockets = {} // property websocket, value: game
 var connectionID = 0
@@ -34,6 +34,7 @@ setInterval(function () {
             }
         }
     }
+    stats.ongoingGames = Math.floor(websockets.length / 2)
 }, 50000)
 
 wss.on('connection', function (ws) {
@@ -45,7 +46,7 @@ wss.on('connection', function (ws) {
         player = currentGame.addPlayer(con)
         websockets[con.id] = currentGame
     } else {
-        currentGame = new Game(id++)
+        currentGame = new Game(stats.gamesInitialized++)
         websockets[con.id] = currentGame
         player = currentGame.addPlayer(con)
     }
@@ -119,6 +120,19 @@ wss.on('connection', function (ws) {
                         gameObj.setStatus('A')
                     }
                 }
+                if (mesObj.type === 'nickname') {
+                    if (mesObj.player === 'A') {
+                        gameObj.nickNameA = mesObj.nickname
+                        if (gameObj.nickNameB !== null) {
+                            messages.nickNames(gameObj.nickNameA, gameObj.nickNameB)
+                        }
+                    } else {
+                        gameObj.nickNameB = mesObj.nickname
+                        if (gameObj.nickNameA !== null) {
+                            messages.nickNames(gameObj.nickNameA, gameObj.nickNameB)
+                        }
+                    }
+                }
             } catch (e) {
                 console.log('[LOG] invalid message')
             }
@@ -129,6 +143,7 @@ wss.on('connection', function (ws) {
         if (gameObj.playerA === ws) {
             if (gameObj.playerB != null) {
                 gameObj.setStatus('B')
+                stats.blackVictories++
                 var gameEndMessage = messages.gameEnd('B', gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)
                 gameObj.playerB.send(JSON.stringify(gameEndMessage))
             } else {
@@ -137,6 +152,7 @@ wss.on('connection', function (ws) {
         } else {
             if (gameObj.playerA != null) {
                 gameObj.setStatus('A')
+                stats.whiteVictories++
                 var gameEndMessage = messages.gameEnd('A', gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)
                 gameObj.playerA.send(JSON.stringify(gameEndMessage))
             } else {
@@ -150,9 +166,11 @@ function endGame (gameObj) {
     let winner = 'draw'
     if (gameObj.gameState.scorePlayerA > gameObj.gameState.scorePlayerB) {
         winner = 'A'
+        stats.whiteVictories++
         gameObj.setStatus('A')
     } else if (gameObj.gameState.scorePlayerB > gameObj.gameState.scorePlayerA) {
         winner = 'B'
+        stats.blackVictories++
         gameObj.setStatus('B')
     }
     if (arguments[1] !== undefined) {
