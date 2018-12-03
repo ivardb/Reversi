@@ -58,68 +58,90 @@ wss.on('connection', function (ws) {
     }
 
     ws.on('message', function incoming (message) {
-        console.log('[LOG:' + websockets[con.id].id + '] ' + message)
-        let gameObj = websockets[con.id]
-        let mesObj
-        try {
-            mesObj = JSON.parse(message)
-            let playerType = mesObj.player
-            var color
-            if (playerType === 'A') {
-                color = -1
-            } else {
-                color = 1
-            }
-            if (mesObj.type === 'move') {
-                if (gameObj.generalState === '2 players') {
-                    if (playerType === 'A') {
-                        gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y)
-                        gameObj.gameState.calculateScore(gameObj.board)
-                        gameObj.gameState.clear()
-                        gameObj.updateValidMoves(gameObj.board, color)
-                        gameObj.updateValidMoves(gameObj.board, color * -1)
-                        gameObj.playerA.send(JSON.stringify(messages.board(gameObj.board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)))
-                        gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)))
-                        if (gameObj.gameState.canMove(color * -1)) {
-                            gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesBlack)))
-                            console.log('Player B turn')
-                        } else if (gameObj.gameState.canMove(color)) {
-                            gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)))
-                            console.log('Player A turn')
+        if (websockets[con.id] !== undefined) {
+            console.log('[LOG:' + websockets[con.id].id + '] ' + message)
+            let gameObj = websockets[con.id]
+            let mesObj
+            try {
+                mesObj = JSON.parse(message)
+                let playerType = mesObj.player
+                var color
+                if (playerType === 'A') {
+                    color = -1
+                } else {
+                    color = 1
+                }
+                if (mesObj.type === 'move') {
+                    if (gameObj.generalState === '2 players') {
+                        if (playerType === 'A') {
+                            gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y)
+                            gameObj.gameState.calculateScore(gameObj.board)
+                            gameObj.gameState.clear()
+                            gameObj.updateValidMoves(gameObj.board, color)
+                            gameObj.updateValidMoves(gameObj.board, color * -1)
+                            gameObj.playerA.send(JSON.stringify(messages.board(gameObj.board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)))
+                            gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)))
+                            if (gameObj.gameState.canMove(color * -1)) {
+                                gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesBlack)))
+                                console.log('Player B turn')
+                            } else if (gameObj.gameState.canMove(color)) {
+                                gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)))
+                                console.log('Player A turn')
+                            } else {
+                                endGame(gameObj)
+                            }
                         } else {
-                            endGame(gameObj)
-                        }
-                    } else {
-                        gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y)
-                        gameObj.gameState.calculateScore(gameObj.board)
-                        gameObj.gameState.clear()
-                        gameObj.updateValidMoves(gameObj.board, color)
-                        gameObj.updateValidMoves(gameObj.board, color * -1)
-                        gameObj.playerA.send(JSON.stringify(messages.board(gameObj.board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)))
-                        gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)))
-                        if (gameObj.gameState.canMove(color * -1)) {
-                            gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)))
-                            console.log('Player A turn')
-                        } else if (gameObj.gameState.canMove(color)) {
-                            gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesBlack)))
-                            console.log('Player B turn')
-                        } else {
-                            endGame(gameObj)
+                            gameObj.capture(gameObj.board, color, mesObj.x, mesObj.y)
+                            gameObj.gameState.calculateScore(gameObj.board)
+                            gameObj.gameState.clear()
+                            gameObj.updateValidMoves(gameObj.board, color)
+                            gameObj.updateValidMoves(gameObj.board, color * -1)
+                            gameObj.playerA.send(JSON.stringify(messages.board(gameObj.board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)))
+                            gameObj.playerB.send(JSON.stringify(messages.board(gameObj.board.boardArray, gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)))
+                            if (gameObj.gameState.canMove(color * -1)) {
+                                gameObj.playerA.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesWhite)))
+                                console.log('Player A turn')
+                            } else if (gameObj.gameState.canMove(color)) {
+                                gameObj.playerB.send(JSON.stringify(messages.turn(gameObj.gameState.validMovesBlack)))
+                                console.log('Player B turn')
+                            } else {
+                                endGame(gameObj)
+                            }
                         }
                     }
                 }
-            }
-            if (mesObj.type === 'concede') {
-                if (ws === gameObj.playerA) {
-                    endGame(gameObj, 'B')
-                    gameObj.setStatus('B')
-                } else {
-                    endGame(gameObj, 'A')
-                    gameObj.setStatus('A')
+                if (mesObj.type === 'concede') {
+                    if (ws === gameObj.playerA) {
+                        endGame(gameObj, 'B')
+                        gameObj.setStatus('B')
+                    } else {
+                        endGame(gameObj, 'A')
+                        gameObj.setStatus('A')
+                    }
                 }
+            } catch (e) {
+                console.log('[LOG] invalid message')
             }
-        } catch (e) {
-            console.log('[LOG] invalid message')
+        }
+    })
+    ws.on('close', function () {
+        let gameObj = websockets[con.id]
+        if (gameObj.playerA === ws) {
+            if (gameObj.playerB != null) {
+                gameObj.setStatus('B')
+                var gameEndMessage = messages.gameEnd('B', gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)
+                gameObj.playerB.send(JSON.stringify(gameEndMessage))
+            } else {
+                gameObj.setStatus('Aborted')
+            }
+        } else {
+            if (gameObj.playerA != null) {
+                gameObj.setStatus('A')
+                var gameEndMessage = messages.gameEnd('A', gameObj.gameState.scorePlayerA, gameObj.gameState.scorePlayerB)
+                gameObj.playerA.send(JSON.stringify(gameEndMessage))
+            } else {
+                gameObj.setStatus('Aborted')
+            }
         }
     })
 })

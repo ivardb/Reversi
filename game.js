@@ -28,8 +28,8 @@ game.prototype.states['Aborted'] = 5
 // possible state changes
 
 game.prototype.transitionMatrix = [
-    [0, 1, 0, 0, 0, 0], // 0 players
-    [1, 0, 1, 0, 0, 0], // 1 player
+    [0, 1, 0, 0, 0, 1], // 0 players
+    [1, 0, 1, 0, 0, 1], // 1 player
     [0, 0, 0, 1, 1, 1], // 2 players
     [0, 0, 0, 0, 0, 0], // A
     [0, 0, 0, 0, 0, 0], // B
