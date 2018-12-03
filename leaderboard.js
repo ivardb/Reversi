@@ -24,5 +24,18 @@ function add (nickname, score, position) {
     }
 }
 
+function parseBoard () {
+    var res = Array(10)
+    for (let i = 0; i < 10; i++) {
+        if (leaderboard[i] === undefined) {
+            res[i] = { 'name': '-', 'score': '-' }
+        } else {
+            res[i] = { 'name': leaderboard[i].name, 'score': leaderboard[i].score }
+        }
+    }
+    return res
+}
+
 module.exports.add = addScore
 module.exports.leaderboard = leaderboard
+module.exports.returnParsed = parseBoard
