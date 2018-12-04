@@ -67,7 +67,7 @@ footer{
 }
 
 #versionInfo::after{
-	content: "0.100.6 (beta)"
+	content: "0.100.6 (beta)";
 }
 
 #copyRightInfo{

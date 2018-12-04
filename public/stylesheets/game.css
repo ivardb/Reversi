@@ -69,7 +69,6 @@
 	left: 50%;
 	top: 100px;
 	color: #443F35;
-
 }
 
 #boardTable{
@@ -115,6 +114,7 @@
 	right: 25px;
 	z-index: 110;
 	background-image: url("/images/enterFullScreen.png");
+	cursor: pointer;
 }
 
 #popup{

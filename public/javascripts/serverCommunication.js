@@ -125,12 +125,12 @@ socket.onmessage = function incoming (message) {
         } else {
             popup(-1)
         }
+        stopTimer()
     } else if (mesObj.type === 'nicknames') {
         console.log('message')
         document.getElementById('player1name').innerHTML = mesObj.nickA
         document.getElementById('player2name').innerHTML = mesObj.nickB
         timer()
-        drawValidOptions(validOptions)
     }
 }
 
