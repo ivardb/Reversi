@@ -1,3 +1,11 @@
+@keyframes waitAnimation {
+	0%		{top: 0px; left: 0px;}
+	25% 	{top: 0px; left: 20vh;}
+	50% 	{top: 20vh; left: 20vh;}
+	75%		{top: 20vh; left: 0px;}
+	100%	{top: 0px; left: 0px;}
+}
+
 #gameright{
 	display: block;
 	position: fixed;
@@ -106,7 +114,7 @@
 	top: 25px;
 	right: 25px;
 	z-index: 110;
-	border: 3px solid yellow;
+	background-image: url("/images/enterFullScreen.png");
 }
 
 #popup{
@@ -143,4 +151,101 @@
 	text-align: center;
 	font-size: 4vh;
 	color: #FFFFFF; 
+}
+
+/*layover*/
+#waitLayover{
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	background-color: #443f35;
+	top: 0px;
+	left: 0px;
+	z-index: 150;
+}
+
+#animcontainer{
+	position: fixed;
+	width: 30vh;
+	height: 30vh;
+	margin: -15vh;
+	top: 50vh;
+	left: 50vw;
+}
+
+#blockA{
+	border-radius: 5vh;
+	position: absolute;
+	background-color: blue;
+	top: 0px;
+	left: 0px;
+	width: 10vh;
+	height: 10vh;
+	/*animation*/
+	animation-name: waitAnimation;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease;
+}
+
+#blockB{
+	border-radius: 5vh;
+	position: absolute;
+	background-color: red;
+	top: 0px;
+	right: 0px;
+	width: 10vh;
+	height: 10vh;
+	/*animation*/
+	animation-name: waitAnimation;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease;
+	animation-delay: -1s;
+}
+
+#blockC{
+	border-radius: 5vh;
+	background-color: yellow;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width: 10vh;
+	height: 10vh;
+	/*animation*/
+	animation-name: waitAnimation;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease;
+	animation-delay: -2s;
+}
+
+#blockD{
+	border-radius: 5vh;
+	position: absolute;
+	background-color: green;
+	bottom: 0px;
+	left: 0px;
+	width: 10vh;
+	height: 10vh;
+	/*animation*/
+	animation-name: waitAnimation;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease;
+	animation-delay: -3s;
+}
+
+#waittext{
+	color: #FFFFFF;
+	position: fixed;
+	width: 60vh;
+	text-align: center;
+	font-size: 5vh;
+	font-weight: 600;
+	margin-left: -30vh;
+	left: 50vw;
+	top: 70vh;
+
+
 }

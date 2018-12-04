@@ -13,51 +13,184 @@
 #centersection{
 	position: fixed;
 	margin: 0px;
-	margin-top: -100px;
-	margin-left: -100px;
+	margin-top: -150px;
+	margin-left: -150px;
 	top: 50%;
 	left: 50%;
 	display: inline-block;
-	width: 200px;
+	width: 300px;
 	padding: 0px;
-	border: 3px solid red;
 }
 
 #playbutton{
 	margin: 0px;
 	display: inline-block;
-	background-color: #43C12A;
-	height: 200px;
-	width: 200px;
-	border-radius: 100px;
+	background-color: #0D9629;
+	height: 300px;
+	width: 300px;
+	border-radius: 150px;
 	color: black;
 	padding: 0px;
 	border: none;
 	cursor: pointer;
+	-webkit-transition: background-color .3s;
+	transition: background-color .3s;
 }
 
 #playbutton:hover{
-	background-color: #0D9620;
-}
-
-#playbutton:active{
-	box-shadow: none;
 	background-color: #43C12A;
 }
+
 	
 #arrow_right{
 	position: absolute;
 	width: 0; 
 	height: 0; 
-	border-top: 50px solid transparent;
-	border-bottom: 50px solid transparent;
-	border-left: 85px solid #080705;
-	margin: 50px;
-	margin-left: 70px;
+	border-top: 75px solid transparent;
+	border-bottom: 75px solid transparent;
+	border-left: 125px solid #080705;
+	margin: 75px;
+	margin-left: 105px;
 	top: 0px;
 	pointer-events: none;
 }	
 
 #nickname{
-	width: 200px;
+	margin-top: 15px;
+	width: 500px;
+	margin-left: -100px;
+	padding: 10px;
+	font-size: 30pt;
+	border: 3px solid #443F35;
+
 }
+
+/*Stats*/
+#mainleft{
+	position: fixed;
+	width: 300px;
+	height: 129px;
+	margin-top: -180px;
+	top: 50vh;
+	left: 20px;
+}
+
+#stats p{
+	text-align: center;
+	font-size: 20pt;
+	height: 30px;
+	margin: 0px;
+	background-color: #443F35;
+	color: #FFFFFF;
+}
+
+#statstable{
+	width: 100%;
+	border-collapse: collapse;
+	height: 99px;
+	border: 5px solid #443F35;
+}
+
+#statstable tr:nth-of-type(2n){
+	background-color: #FFFFFF;
+}
+
+#statstable tr:nth-of-type(2n+1){
+	background-color: #DDDDDD;
+}
+
+/*Leaderbord*/
+#mainright{
+	position: fixed;
+	width: 300px;
+	height: 360px;
+	margin-top: -180px;
+	top: 50vh;
+	right: 20px;
+}
+
+#leaderbords{
+	float: right;
+	width: 100%;
+}
+
+#leaderbords p{
+	text-align: center;
+	font-size: 20pt;
+	height: 30px;
+	margin: 0px;
+	background-color: #443F35;
+	color: #FFFFFF;
+}
+
+#lbtable{
+	width: 100%;
+	border-collapse: collapse;
+	height: 330px;
+	border: 5px solid #443F35;
+}
+
+#lbtable tr:nth-of-type(2n){
+	background-color: #FFFFFF;
+}
+
+#lbtable tr:nth-of-type(2n+1){
+	background-color: #DDDDDD;
+}
+
+#lbtable tr:nth-of-type(1){
+	font-weight: bold;
+}
+
+/*popup*/
+#popup{
+	background-size: cover;
+	width: 50vw;
+	display: block;
+	position: fixed;
+	top: 25vh;
+	right: 25vw;
+	z-index: 111;
+	background-color: #FFFFFF;
+	border: 3px solid #443F35;
+}
+
+#popup h3{
+	position: absolute;
+	margin: 0px;
+	margin-top: 0px;
+	width: 100%;
+	text-align: center;
+	font-size: 4vh;
+	background-color: #443F35;
+	color: #FFFFFF;
+	-webkit-transition: background-color .1s;
+	transition: background-color .1s;
+}
+
+#popup p{
+	width: 100%;
+	text-align: center;
+	font-size: 2vh;
+	margin-top: 7vh;
+	margin-bottom: 7vh;
+}
+
+#popup div{
+	position: absolute;
+	height: 4vh;
+	width: 25vw;
+	bottom: 1vh;
+	right: 1vh;
+	background-color: #0D9620;
+	text-decoration: none;
+	text-align: center;
+	font-size: 3vh;
+	color: #FFFFFF; 
+	cursor: pointer;
+}
+
+#popup div:hover{
+	background-color: #43C12A;
+}
+

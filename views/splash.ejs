@@ -1,55 +1,60 @@
-<head>
-	<title>Reversi online multiplayer</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-	<link rel="stylesheet" type="text/css" href="stylesheets/splash.css">
-	<link rel="icon" type="image/png" sizes="192x192"  href="images/Favicons/android-icon-192x192.png">
-	<script type="text/javascript" src="javascripts/cookies.js"></script>
-</head>
-<body>
-	<header>
-		<h1>Reversi</h1>
-		<h2>online multiplayer</h2>
-	</header>
-	<main>
-		<section id="centersection">
-			<form>
-				<input id="playbutton" onclick="setCookie()">
-					<div id="arrow_right"></div>
-				</input>
-				<input type="text" placeholder="Nickname" id="nickname"></input>
-			</form>
-		</section>
-		<section id="mainright">
-			<div id="leaderbords">
-				<h3 id="lbtitle">Leaderbords</h3>
-				<table>
-					<tr id="lbheader"><th>Name</th><th>Points</th></tr>
-					<tr id="lb0"><td><%= lb1n%></td><td><%= lb1s%></td></tr>
-					<tr id="lb1"><td><%= lb2n%></td><td><%= lb2s%></td></tr>
-					<tr id="lb2"><td><%= lb3n%></td><td><%= lb3s%></td></tr>
-					<tr id="lb3"><td><%= lb4n%></td><td><%= lb4s%></td></tr>
-					<tr id="lb4"><td><%= lb5n%></td><td><%= lb5s%></td></tr>
-					<tr id="lb5"><td><%= lb6n%></td><td><%= lb6s%></td></tr>
-					<tr id="lb6"><td><%= lb7n%></td><td><%= lb7s%></td></tr>
-					<tr id="lb7"><td><%= lb8n%></td><td><%= lb8s%></td></tr>
-					<tr id="lb8"><td><%= lb9n%></td><td><%= lb9s%></td></tr>
-					<tr id="lb9"><td><%= lb10n%></td><td><%= lb10s%></td></tr>
-				</table>
-			</div>
-		</section>
-		<section id="mainleft">
-		<div id="stats">
-			<h3 id="statstitle">Stats</h3>
-			<table>
-				<tr><th>Started games</th><td><%= initializedGames%></td></tr>
-				<tr><th>Wins by black</th><td><%= blackWins%></td></tr>
-				<tr><th>Wins by white</th><td><%= whiteWins%></td></tr>
-			</table>
-		</div>
-		</section>
-	</main>
-	<footer>
-		<p id="copyRightInfo">Copyright 2018 Ivar de Bruin & Jaap de Jong</p>
-		<p id="versionInfo">Version: 0.100.6 (beta)</p>
-	</footer>
-</body>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Reversi online multiplayer</title>
+		<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+		<link rel="stylesheet" type="text/css" href="stylesheets/splash.css">
+		<link rel="icon" type="image/png" sizes="192x192"  href="images/Favicons/android-icon-192x192.png">
+		<script type="text/javascript" src="javascripts/cookies.js"></script>
+		<script type="text/javascript" src="javascripts/popup.js"></script>
+		<script type="text/javascript" src="javascripts/loadname.js"></script>
+	</head>
+	<body onload="loadName()">
+		<header>
+			<h1>Reversi</h1>
+			<h2>online multiplayer</h2>
+		</header>
+		<main>
+			<section id="centersection">
+				<form>
+					<input id="playbutton" onclick="setCookie()">
+						<div id="arrow_right"></div>
+					</input>
+					<input type="text" placeholder="Nickname" id="nickname"></input>
+				</form>
+			</section>
+			<section id="mainright">
+				<div id="leaderbords">
+					<p>Leaderbord</p>
+					<table id="lbtable">
+						<tr id="lbheader"><th>Name</th><th>Points</th></tr>
+						<tr><td><%= lb1n%></td><td><%= lb1s%></td></tr>
+						<tr><td><%= lb2n%></td><td><%= lb2s%></td></tr>
+						<tr><td><%= lb3n%></td><td><%= lb3s%></td></tr>
+						<tr><td><%= lb4n%></td><td><%= lb4s%></td></tr>
+						<tr><td><%= lb5n%></td><td><%= lb5s%></td></tr>
+						<tr><td><%= lb6n%></td><td><%= lb6s%></td></tr>
+						<tr><td><%= lb7n%></td><td><%= lb7s%></td></tr>
+						<tr><td><%= lb8n%></td><td><%= lb8s%></td></tr>
+						<tr><td><%= lb9n%></td><td><%= lb9s%></td></tr>
+						<tr><td><%= lb10n%></td><td><%= lb10s%></td></tr>
+					</table>
+				</div>
+			</section>
+			<section id="mainleft">
+				<div id="stats">
+					<p>Stats</p>
+					<table id="statstable">
+						<tr><th>Started games</th><td><%= initializedGames%></td></tr>
+						<tr><th>Wins by black</th><td><%= blackWins%></td></tr>
+						<tr><th>Wins by white</th><td><%= whiteWins%></td></tr>
+					</table>
+				</div>
+			</section>
+		</main>
+		<footer>
+			<p id="copyRightInfo">&copy; 2018 Ivar de Bruin & Jaap de Jong</p>
+			<p id="versionInfo">Version: </p>
+		</footer>
+	</body>
+</html>

@@ -22,6 +22,7 @@ function setFullScreen () {
     else if (fullScreenElement.mozRequestFullscreen)fullScreenElement.mozRequestFullscreen()// for firefox
     else if (fullScreenElement.msRequestFullScreen)fullScreenElement.msRequestFullScreen()// for edge
     else fullScreenElement.requestFullscreen()
+    document.getElementById('fullscreenButton').setAttribute('background-image', 'url("/images/exitFullScreen.png")')
 }
 
 function exitFullScreen () {
@@ -31,4 +32,5 @@ function exitFullScreen () {
     else if (fullScreenElement.mozCancelFullScreen)fullScreenElement.mozCancelFullScreen()
     else if (fullScreenElement.msExitFullscreen)fullScreenElement.msExitFullscreen()
     else fullScreenElement.exitFullScreen()
+    document.getElementById('fullscreenButton').setAttribute('background-image', 'url("/images/enterFullScreen.png")')
 }

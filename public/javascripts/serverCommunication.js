@@ -112,6 +112,7 @@ socket.onmessage = function incoming (message) {
         }
         sendName()
         createBoard(mesObj.board)
+        removeWaitLayover()
     } else if (mesObj.type === 'turn') {
         myTurn = true
         validOptions = mesObj.valid
@@ -133,10 +134,10 @@ socket.onmessage = function incoming (message) {
     }
 }
 
-function getCookie() {
+function getCookie () {
     var content = document.cookie
     console.log(content)
-    content = content.replace('name:', '')
+    content = content.replace('name: ', '')
     console.log(content)
     return content
 }

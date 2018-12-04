@@ -1,39 +1,43 @@
-<head>
-	<title>Reversi online multiplayer</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-	<link rel="stylesheet" type="text/css" href="stylesheets/game.css">
-	<link rel="icon" type="image/png" sizes="192x192"  href="images/Favicons/android-icon-192x192.png">
-</head>
-<body>
-	<header>
-		<h1>Reversi</h1>
-		<h2>online multiplayer</h2>
-	</header>
-	<main>
-		<div id="fullscreenButton" onclick = "fullscreenHandler()"></div>
-		<section id="gameleft">
-			<h2 id="player1name" class="playername">-</h2>
-			<h3 id="player1type" class="playertype">-</h3>
-			<h3 id="player1score" class="playerscore">Score: - </h3>
-		</section>
-		<section id="gamecenter">
-			<h2 id="clock">00:00:00</h2>
-			<div id="board"></div>
-		</section>
-		<section id="gameright">
-			<h2 id="player2name" class="playername">-</h2>
-			<h3 id="player2type" class="playertype">-</h3>
-			<h3 id="player2score" class="playerscore">Score: - </h3>
-		</section>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Reversi online multiplayer</title>
+		<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+		<link rel="stylesheet" type="text/css" href="stylesheets/game.css">
+		<link rel="icon" type="image/png" sizes="192x192"  href="images/Favicons/android-icon-192x192.png">
+		<script type="text/javascript", src="javascripts/waitlayover.js"></script>
+	</head>
+	<body onload="startWait()">
+		<header>
+			<h1>Reversi</h1>
+			<h2>online multiplayer</h2>
+		</header>
+		<main>
+			<div id="fullscreenButton" onclick = "fullscreenHandler()"></div>
+			<section id="gameleft">
+				<h2 id="player1name" class="playername"></h2>
+				<h3 id="player1type" class="playertype"></h3>
+				<h3 id="player1score" class="playerscore"></h3>
+			</section>
+			<section id="gamecenter">
+				<h2 id="clock">00:00:00</h2>
+				<div id="board"></div>
+			</section>
+			<section id="gameright">
+				<h2 id="player2name" class="playername"></h2>
+				<h3 id="player2type" class="playertype"></h3>
+				<h3 id="player2score" class="playerscore"></h3>
+			</section>
 
-	</main>
-	<footer>
-		<span id="copyrightInfo">&copy; 2018 Ivar de Bruin & Jaap de Jong</span>
-		<span id="versionInfo">Version: 0.100.6 (beta)</span>
-	</footer>
-	<script type="text/javascript" src="javascripts/timer.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="javascripts/generateBoard.js"></script>
-	<script type="text/javascript" src="javascripts/serverCommunication.js"></script> 
-	<script type="text/javascript" src="javascripts/fullscreen.js"></script>
-</body>
+		</main>
+		<footer>
+			<span id="copyrightInfo">&copy; 2018 Ivar de Bruin & Jaap de Jong</span>
+			<span id="versionInfo">Version: </span>
+		</footer>
+		<script type="text/javascript" src="javascripts/timer.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript" src="javascripts/generateBoard.js"></script>
+		<script type="text/javascript" src="javascripts/serverCommunication.js"></script> 
+		<script type="text/javascript" src="javascripts/fullscreen.js"></script>
+	</body>
+</html>	

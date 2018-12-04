@@ -10,8 +10,10 @@ body{
 	margin: 0px;
 	padding: 0px;
 	background-color: #ffffff;
-	max-height: 100vh;
+	height: 100vh;
+	overflow: hidden;
 }
+
 
 main{
 	width: 100%;
@@ -29,7 +31,6 @@ header{
 	display: inline-block;
 	position: fixed;
 }	
-
 
 header h1{
 	color: #43C12A;
@@ -63,6 +64,10 @@ footer{
 	float: right;
 	color: #ffffff;
 	margin: 10px;
+}
+
+#versionInfo::after{
+	content: "0.100.6 (beta)"
 }
 
 #copyRightInfo{
