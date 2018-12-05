@@ -17,7 +17,7 @@ function popup (headtext, messagetext, buttontext, buttonhref) {
     popup.appendChild(header)
     popup.appendChild(message)
     popup.appendChild(button)
-    document.getElementsByTagName('body')[0].appendChild(popup)
+    document.getElementsByTagName('main')[0].appendChild(popup)
 }
 
 function closePopup () {

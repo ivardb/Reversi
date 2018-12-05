@@ -69,28 +69,14 @@ function removeValidOptions (validOptions) {
     }
 }
 
-function popup (win) {
-    let popup = document.createElement('div')
-    popup.id = 'popup'
-    let header = document.createElement('p')
-    let visual = document.createElement('div')
-    let button = document.createElement('a')
-    button.innerHTML = 'Play again!'
-    button.href = '/play'
+function showPopup (win) {
     if (win === 1) {
-        visual.id = 'win'
-        header.innerHTML = 'You won!'
+        popup('You won!', '', 'Play Again', '/play')
     } else if (win === -1) {
-        visual.id = 'loss'
-        header.innerHTML = 'You lost!'
+        popup('You lost!', 'Better luck next time!', 'Play Again', '/play')
     } else if (win === 0) {
-        visual.id = 'draw'
-        header.innerHTML = 'Draw!'
+        popup('Draw!', '', 'Play Again', '/play')
     }
-    popup.appendChild(header)
-    popup.appendChild(visual)
-    popup.appendChild(button)
-    document.getElementsByTagName('main')[0].appendChild(popup)
 }
 
 socket.onmessage = function incoming (message) {
@@ -119,11 +105,11 @@ socket.onmessage = function incoming (message) {
         drawValidOptions(mesObj.valid)
     } else if (mesObj.type === 'gameEnd') {
         if (mesObj.ending === player) {
-            popup(1)
+            showPopup(1)
         } else if (mesObj.ending === 'draw') {
-            popup(0)
+            showPopup(0)
         } else {
-            popup(-1)
+            showPopup(-1)
         }
         stopTimer()
     } else if (mesObj.type === 'nicknames') {
