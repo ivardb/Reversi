@@ -113,7 +113,6 @@ socket.onmessage = function incoming (message) {
         }
         stopTimer()
     } else if (mesObj.type === 'nicknames') {
-        console.log('message')
         document.getElementById('player1name').innerHTML = mesObj.nickA
         document.getElementById('player2name').innerHTML = mesObj.nickB
         timer()
@@ -122,8 +121,6 @@ socket.onmessage = function incoming (message) {
 
 function getCookie () {
     var content = document.cookie
-    console.log(content)
     content = content.replace('name: ', '')
-    console.log(content)
     return content
 }
