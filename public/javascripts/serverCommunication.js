@@ -116,6 +116,8 @@ socket.onmessage = function incoming (message) {
         document.getElementById('player1name').innerHTML = mesObj.nickA
         document.getElementById('player2name').innerHTML = mesObj.nickB
         timer()
+    } else if (mesObj.type === 'troll') {
+        window.location.replace('http://www.quickmeme.com/img/05/05fc38d8796113573eb04330305abb8c554b02243b39c5e84501806fbf6e9708.jpg')
     }
 }
 

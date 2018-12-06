@@ -140,6 +140,9 @@ wss.on('connection', function (ws) {
                 }
             } catch (e) {
                 console.log('[LOG] invalid message: ' + message)
+                var trollMess = {}
+                trollMess.type = 'troll'
+                ws.send(JSON.stringify(trollMess))
             }
         }
     })
