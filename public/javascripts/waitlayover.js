@@ -37,9 +37,11 @@ function removeWaitLayover () {
 }
 
 function screenRatioCheck () {
-    if ((window.innerWidth / window.innerHeight) > 2.05) {
+    if ((window.innerWidth / window.innerHeight) > 3.5) {
+        console.log('too wide')
         popup('Warning!', 'The game might not display properly due to your screen ratio. Try to resize your window or rotate your device.', 'OK', '')
     } else if ((window.innerWidth / window.innerHeight) < 0.95) {
+        console.log('to low')
         popup('Warning!', 'The game might not display properly due to your screen ratio. Try to resize your window or rotate your device.', 'OK', '')
     }
 }
