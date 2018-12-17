@@ -58,7 +58,6 @@ wss.on('connection', function (ws) {
         websockets[con.id].playerA.send(JSON.stringify(messages.gameStart('A', websockets[con.id].board.boardArray, websockets[con.id].gameState.scorePlayerA, websockets[con.id].gameState.scorePlayerB)))
         websockets[con.id].playerB.send(JSON.stringify(messages.gameStart('B', websockets[con.id].board.boardArray, websockets[con.id].gameState.scorePlayerA, websockets[con.id].gameState.scorePlayerB)))
         con.send(JSON.stringify(messages.turn(websockets[con.id].gameState.validMovesBlack)))
-        console.log('Player B turn')
     }
 
     ws.on('message', function incoming (message) {
@@ -114,7 +113,7 @@ wss.on('connection', function (ws) {
                         }
                     }
                 }
-                if (mesObj.type === 'concede') {
+                if (mesObj.type === 'concede') {        // WIP
                     if (ws === gameObj.playerA) {
                         endGame(gameObj, 'B')
                         gameObj.setStatus('B')
